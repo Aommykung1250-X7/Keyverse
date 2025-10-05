@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEYVERSE</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style>
+    .carousel-item {
+      min-height: 400px;
+    }
+
+    .navbar {
+      min-height: 80px;
+      font-size: 1.25rem;
+    }
+
+    .nav-item {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .navbar .navbar-brand {
+      font-size: 2rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .navbar .nav-link {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .btn-link svg {
+      width: 30px !important;
+      height: 30px !important;
+    }
+
+    body {
+      color: #4d4c51;
+    }
+  </style>
+  <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <symbol id="instagram" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <rect x="10" y="10" width="12" height="12" rx="4" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <circle cx="16" cy="16" r="3" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <circle cx="21.2" cy="12.8" r="1" fill="#bfc2c6" />
+    </symbol>
+    <symbol id="facebook" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <path d="M18.5 17.5h2l.5-3h-2.5v-1.5c0-.6.2-1 .8-1H21V9.5h-2c-2 0-2.5 1.2-2.5 2.5V14.5h-1.5v3h1.5V23h3v-5.5z"
+        fill="#bfc2c6" />
+    </symbol>
+  </svg>
+</head>
+
+<body>
+  <circle cx="16" cy="16" r="3" stroke="#bfc2c6" stroke-width="2" fill="none" />
+  <circle cx="21.2" cy="12.8" r="1" fill="#bfc2c6" />
+  </symbol>
+  <symbol id="facebook" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
+    <path d="M18.5 17.5h2l.5-3h-2.5v-1.5c0-.6.2-1 .8-1H21V9.5h-2c-2 0-2.5 1.2-2.5 2.5V14.5h-1.5v3h1.5V23h3v-5.5z"
+      fill="#bfc2c6" />
+  </symbol>
+  </svg>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+        aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="#">KEYVERSE</a>
+        <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" style="color: #866953; font-weight: 500" href="#">Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 500" href="#">Keyboards</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 500" href="#">Switches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 500" href="#">Keycaps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 500" href="#">Accessories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 500" href="#">DIY / Modding</a>
+          </li>
+        </ul>
+        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+          <!-- Search Icon -->
+          <button class="btn btn-link p-2" style="box-shadow: none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            </svg>
+          </button>
+          <!-- Handbag Icon -->
+          <button class="btn btn-link p-2" style="box-shadow: none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- slide -->
+  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-interval="8000">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active"
+        aria-current="true"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="img/banner.png" class="d-block w-100" alt="Banner 1" style="object-fit: cover; height: 400px" />
+        <div class="container">
+          <div class="carousel-caption text-start" style="color: #4d4c51">
+            <h1>Example headline.</h1>
+            <p class="opacity-75">
+              Some representative placeholder content for the first slide of
+              the carousel.
+            </p>
+            <p>
+              <a class="btn" style="background-color: #4d4c51; color: #fff" href="#">Recommend</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="img/banner.png" class="d-block w-100" alt="Banner 2" style="object-fit: cover; height: 400px" />
+        <div class="container">
+          <div class="carousel-caption" style="color: #4d4c51">
+            <h1>Another example headline.</h1>
+            <p>
+              Some representative placeholder content for the second slide of
+              the carousel.
+            </p>
+            <p>
+              <a class="btn" style="background-color: #4d4c51; color: #fff" href="#">New Collection</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item active">
+        <img src="img/banner.png" class="d-block w-100" alt="Banner 3" style="object-fit: cover; height: 400px" />
+        <div class="container">
+          <div class="carousel-caption text-end" style="color: #4d4c51">
+            <h1>One more for good measure.</h1>
+            <p>
+              Some representative placeholder content for the third slide of
+              this carousel.
+            </p>
+            <p>
+              <a class="btn" style="background-color: #4d4c51; color: #fff" href="#">Most Seller</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- slide end -->
+  <!-- Product Section -->
+  <!-- Featured Products (2 items) -->
+  <div style="
+        background: linear-gradient(to bottom, #e5e7eb 0%, #fff 100%);
+        padding: 40px 0 40px 0;
+      ">
+    <div class="container">
+      <h2 class="fw-bold me-auto" style="
+            font-size: 2.7rem;
+            letter-spacing: 2px;
+            color: #444;
+            padding-left: 25px;
+          ">
+        PRODUCT
+      </h2>
+      <div class="d-flex justify-content-center gap-5 flex-wrap">
+        <!-- Card 1 -->
+        <div class="d-flex flex-column align-items-center" style="width: 600px">
+          <div style="
+                width: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+                background: #fff;
+              ">
+            <img src="img/keyboard4.jpg" alt="KEYBOARD NAME" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <div class="fw-bold mt-3" style="font-size: 1.35rem; color: #4d4c51">
+            KEYBOARD NAME
+          </div>
+          <div class="mb-2" style="color: #888; font-size: 1.1rem">
+            ราคา 0000
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="d-flex flex-column align-items-center" style="width: 600px">
+          <div style="
+                width: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+                background: #fff;
+              ">
+            <img src="img/keycap.png" alt="KEYCAP NAME" style="width: 100%; height: 100%; object-fit: cover" />
+          </div>
+          <div class="fw-bold mt-3" style="font-size: 1.35rem; color: #4d4c51">
+            KEYCAP NAME
+          </div>
+          <div class="mb-2" style="color: #888; font-size: 1.1rem">
+            ราคา 0000
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-100 d-flex justify-content-center">
+    <hr class="my-4" style="
+          width: 1300px;
+          border-top: 3px solid #dee2e6;
+          opacity: 1;
+          border-radius: 1px;
+        " />
+  </div>
+  <div style="background: #fff; padding: 32px 0 48px 0">
+    <div class="container">
+      <div class="d-flex align-items-center mb-3">
+        <a href="store.html" class="btn px-5 py-2 fw-bold" style="
+              border-radius: 999px;
+              font-size: 1.1rem;
+              background-color: #4d4c51;
+              color: #fff;
+            ">View more</a>
+      </div>
+      <div class="position-relative">
+        <div id="product-scroll" class="d-flex flex-nowrap overflow-auto pb-3" style="scroll-behavior: smooth">
+          <!-- Product Card 1 -->
+          <div class="card me-4 flex-shrink-0" style="
+                width: 240px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+              ">
+            <img src="img/keyboard1.jpg" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
+            <div class="card-body text-center p-3" style="color: #4d4c51">
+              <div class="fw-bold" style="font-size: 1.1rem">
+                KEYBOARD NAME
+              </div>
+              <div class="text-muted mb-2">ราคา 0000</div>
+            </div>
+          </div>
+          <!-- Product Card 2 -->
+          <div class="card me-4 flex-shrink-0" style="
+                width: 240px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+              ">
+            <img src="img/keyboard2.jpg" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
+            <div class="card-body text-center p-3" style="color: #4d4c51">
+              <div class="fw-bold" style="font-size: 1.1rem">KEYCAP NAME</div>
+              <div class="text-muted mb-2">ราคา 0000</div>
+            </div>
+          </div>
+          <!-- Product Card 3 -->
+          <div class="card me-4 flex-shrink-0" style="
+                width: 240px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+              ">
+            <img src="img/keyboard3.jpg" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
+            <div class="card-body text-center p-3" style="color: #4d4c51">
+              <div class="fw-bold" style="font-size: 1.1rem">
+                Mechanical Keyboard
+              </div>
+              <div class="text-muted mb-2">
+                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
+              </div>
+              <div class="fw-bold">START 0000 BAHT</div>
+            </div>
+          </div>
+          <!-- Product Card 4 -->
+          <div class="card me-4 flex-shrink-0" style="
+                width: 240px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+              ">
+            <img src="img/header.png" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
+            <div class="card-body text-center p-3" style="color: #4d4c51">
+              <div class="fw-bold" style="font-size: 1.1rem">
+                Membrane Keyboard
+              </div>
+              <div class="text-muted mb-2">
+                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
+              </div>
+              <div class="fw-bold">START 0000 BAHT</div>
+            </div>
+          </div>
+          <!-- Product Card 5 -->
+          <div class="card me-4 flex-shrink-0" style="
+                width: 240px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+              ">
+            <img src="img/header1.png" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
+            <div class="card-body text-center p-3" style="color: #4d4c51">
+              <div class="fw-bold" style="font-size: 1.1rem">
+                Ergonomic Keyboard
+              </div>
+              <div class="text-muted mb-2">
+                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
+              </div>
+              <div class="fw-bold">START 0000 BAHT</div>
+            </div>
+          </div>
+          <!-- Product Card 6 -->
+          <div class="card me-4 flex-shrink-0" style="
+                width: 240px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px #0001;
+              ">
+            <img src="img/header1.png" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
+            <div class="card-body text-center p-3" style="color: #4d4c51">
+              <div class="fw-bold" style="font-size: 1.1rem">
+                Ergonomic Keyboard
+              </div>
+              <div class="text-muted mb-2">
+                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
+              </div>
+              <div class="fw-bold">START 0000 BAHT</div>
+            </div>
+          </div>
+          <!-- Add more cards here if needed -->
+        </div>
+        <!-- Scroll Buttons -->
+        <button onclick="scrollProduct(-1)" class="btn btn-light position-absolute top-50 start-0 translate-middle-y"
+          style="
+              z-index: 2;
+              border-radius: 50%;
+              box-shadow: 0 2px 8px #0002;
+              width: 48px;
+              height: 48px;
+            ">
+          <span class="d-flex justify-content-center align-items-center w-100 h-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+              class="bi bi-chevron-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+            </svg>
+          </span>
+        </button>
+        <button onclick="scrollProduct(1)" class="btn btn-light position-absolute top-50 end-0 translate-middle-y"
+          style="
+              z-index: 2;
+              border-radius: 50%;
+              box-shadow: 0 2px 8px #0002;
+              width: 48px;
+              height: 48px;
+            ">
+          <span class="d-flex justify-content-center align-items-center w-100 h-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+              class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- End Product Section -->
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+      </div>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#" aria-label="Instagram">
+            <svg class="bi" width="24" height="24" aria-hidden="true">
+              <use xlink:href="#instagram"></use>
+            </svg>
+          </a>
+
+        </li>
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </footer>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script>
+    function scrollProduct(dir) {
+      const el = document.getElementById("product-scroll");
+      const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
+      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
+    }
+  </script>
+</body>
+
+</html>
