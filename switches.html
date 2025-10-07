@@ -45,8 +45,8 @@
 
     .navbar .nav-link.active,
     .navbar .nav-link:focus { 
-      color: #866953 !important;
-      font-weight: 400;
+      color: #000 !important;
+      font-weight: bold;
     }
 
     .btn-link svg {
@@ -56,6 +56,27 @@
 
     body {
       color: #4d4c51;
+    }
+
+    /* Flash overlay styles */
+    #flash-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.25s;
+    }
+    #flash-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      animation: flashAnim 0.7s linear;
+    }
+    @keyframes flashAnim {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
     }
   </style>
   <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
@@ -99,7 +120,7 @@
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+            <a class="nav-link active " href="switches.html">Switches</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
@@ -132,6 +153,7 @@
       </div>
     </div>
   </nav>
+  <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 <!-- Body project -->
 
 
@@ -166,6 +188,17 @@
       const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
       el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
     }
+    // Show flash overlay after page load
+    window.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('flash-overlay');
+      overlay.classList.add('active');
+      setTimeout(function() {
+        overlay.classList.remove('active');
+      }, 700); // duration matches animation
+    });
+  </script>
+  <!-- Flash overlay for page transition -->
+  <div id="flash-overlay"></div>
   </script>
 </body>
 

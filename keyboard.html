@@ -43,8 +43,8 @@
 
     .navbar .nav-link.active,
     .navbar .nav-link:focus { 
-      color: #866953 !important;
-      font-weight: 400;
+      color: #000 !important;
+      font-weight: bold;
     }
 
     .btn-link svg {
@@ -56,6 +56,26 @@
       color: #4d4c51;
     }
     
+    /* Flash overlay styles */
+    #flash-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.25s;
+    }
+    #flash-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      animation: flashAnim 0.7s linear;
+    }
+    @keyframes flashAnim {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
   </style>
   <link rel="stylesheet" href="styles.css" />
   <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
@@ -96,7 +116,7 @@
           <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
+          <a class="nav-link active" href="keyboard.html">Keyboards</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
@@ -132,14 +152,17 @@
     </div>
   </div>
 </nav>
+<div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 <!-- Body project -->
 <div class="section">
-    <h2>Keyboards</h2>
+  <h2>Keyboards</h2>
     <p class="subtitle">
       ค้นพบประสบการณ์การพิมพ์รูปแบบใหม่ ที่ผสานความแม่นยำ ความสบาย และความงดงามเข้าด้วยกัน<br />
       คีย์บอร์ดแต่ละรุ่นถูกออกแบบมาเพื่อมอบความรู้สึกเฉพาะตัว ทั้งสำหรับการทำงานและการเล่นเกม
     </p>
-
+</div>
+<div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
+<div class="section">
     <div class="product-header">
       <span><strong>New arrived product</strong> the future of typing starts here...</span>
       <div class="scroll-btn right" onclick="scrollRight()">&#8250;</div>
@@ -207,6 +230,17 @@
       const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
       el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
     }
+    // Show flash overlay after page load
+    window.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('flash-overlay');
+      overlay.classList.add('active');
+      setTimeout(function() {
+        overlay.classList.remove('active');
+      }, 700); // duration matches animation
+    });
+  </script>
+  <!-- Flash overlay for page transition -->
+  <div id="flash-overlay"></div>
   </script>
 </body>
 
