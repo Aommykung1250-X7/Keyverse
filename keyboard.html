@@ -299,33 +299,37 @@
       .accessories-card { flex: 0 0 80vw; }
       .accessories-slide-list { gap: 16px; }
     }
-    .button-container {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap; /* ให้ปุ่มขึ้นบรรทัดใหม่อัตโนมัติถ้าหน้าจอแคบ */
-  justify-content: center;
-}
+   .button-container {
+      display: flex;
+      gap: 220px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
 
-.filter-btn {
-  border: 2px solid #555;
-  background-color: transparent;
-  color: #333;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 10px 25px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+    .filter-btn {
+      border: 2px solid #555;
+      background-color: transparent;
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 12px 35px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      min-width: 160px;
+      text-align: center;
+    }
 
-.filter-btn:hover {
-  background-color: #f0f0f0;
-}
+    .filter-btn:hover {
+      background-color: #f0f0f0;
+    }
 
-.filter-btn.active {
-  background-color: #ccc;
-  border-color: #555;
-}
+    .filter-btn.active {
+      background-color: #ccc;
+      border-color: #555;
+    }
   </style>
   <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
@@ -362,10 +366,10 @@
         <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
         <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link active" href="store.html">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
+            <a class="nav-link active" href="keyboard.html">Keyboards</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
@@ -413,10 +417,10 @@
   <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 
   <div class="button-container">
-    <button class="filter-btn active">Mechanical</button>
-    <button class="filter-btn">Membrane</button>
-    <button class="filter-btn">Gaming</button>
-    <button class="filter-btn">Ergonomic</button>
+    <a href="keyboard.html" class="filter-btn active">Mechanical</a>
+    <a href="membrane.html" class="filter-btn">Membrane</a>
+    <a href="gaming.html" class="filter-btn">Gaming</a>
+    <a href="ergonomic.html" class="filter-btn ">Ergonomic</a>
   </div>
 
   <div class="slide-sell-list" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
@@ -483,7 +487,7 @@
   </div>
 
   <div class="accessories-section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
-    <p><span style="color: #000; font-weight: bold;">60% keyboard</span> - compact without compromise....</p>
+    <p><span style="color: #000; font-weight: bold;">75% keyboard</span> - compact without compromise....</p>
     <div class="accessories-slide-container">
       <button class="accessories-slide-btn left" onclick="accessoriesSlide(-1)">
         <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
@@ -537,7 +541,7 @@
     </div>
   </div>
     <div class="accessories-section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
-    <p><span style="color: #000; font-weight: bold;">75% keyboard</span> - compact without compromise....</p>
+    <p><span style="color: #000; font-weight: bold;">60% keyboard</span> - compact without compromise....</p>
     <div class="accessories-slide-container">
       <button class="accessories-slide-btn left" onclick="accessoriesSlide(-1)">
         <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
@@ -647,13 +651,6 @@
       el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
     }
 
-    const buttons = document.querySelectorAll('.filter-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
   </script>
   <!-- Flash overlay for page transition -->
   <div id="flash-overlay"></div>
