@@ -76,6 +76,42 @@
       80% { opacity: 1; }
       100% { opacity: 0; }
     }
+    /*ปุ่ม*/
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px; /* ระยะห่างระหว่างปุ่มเท่ากัน */
+      flex-wrap: wrap; /* ถ้าหน้าจอเล็กจะขึ้นบรรทัดใหม่ */
+      max-width: 90%; /* ป้องกันไม่ให้ล้นขอบจอ */
+    }
+
+    /* ปุ่ม */
+    .filter-btn {
+      border: 2px solid #555;
+      background-color: transparent;
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 12px 35px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 160px; /* ให้ขนาดปุ่มเท่ากัน */
+      text-align: center;
+    }
+
+    /* เมื่อเอาเมาส์ชี้ */
+    .filter-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* ปุ่มที่ถูกเลือก */
+    .filter-btn.active {
+      background-color: #ccc;
+      border-color: #555;
+    }
+
   </style>
   <link rel="stylesheet" href="styles.css" />
   <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
@@ -162,6 +198,12 @@
     </p>
 </div>
 <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
+<div class="button-container">
+    <button class="filter-btn active">Mechanical</button>
+    <button class="filter-btn">Membrane</button>
+    <button class="filter-btn">Gaming</button>
+    <button class="filter-btn">Ergonomic</button>
+  </div>
 <div class="section">
     <div class="product-header">
       <span><strong>New arrived product</strong> the future of typing starts here...</span>
@@ -185,6 +227,36 @@
       <div class="product-card">
         <img src="image3.jpg" alt="Leobog Hi98 Pro">
         <p class="title">Leobog Hi98 Pro</p>
+        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
+        <p class="price">START 0000 BAHT</p>
+      </div>
+      <div class="product-card">
+        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
+        <p class="title">Akko Mu02 Wooden Series</p>
+        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
+        <p class="price">START 0000 BAHT</p>
+      </div>
+      <div class="product-card">
+        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
+        <p class="title">Akko Mu02 Wooden Series</p>
+        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
+        <p class="price">START 0000 BAHT</p>
+      </div>
+      <div class="product-card">
+        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
+        <p class="title">Akko Mu02 Wooden Series</p>
+        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
+        <p class="price">START 0000 BAHT</p>
+      </div>
+      <div class="product-card">
+        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
+        <p class="title">Akko Mu02 Wooden Series</p>
+        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
+        <p class="price">START 0000 BAHT</p>
+      </div>
+      <div class="product-card">
+        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
+        <p class="title">Akko Mu02 Wooden Series</p>
         <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
         <p class="price">START 0000 BAHT</p>
       </div>
@@ -238,6 +310,14 @@
         overlay.classList.remove('active');
       }, 700); // duration matches animation
     });
+     const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  
   </script>
   <!-- Flash overlay for page transition -->
   <div id="flash-overlay"></div>
