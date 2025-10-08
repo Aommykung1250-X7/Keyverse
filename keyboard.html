@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -55,7 +57,7 @@
     body {
       color: #4d4c51;
     }
-    
+
     /* Flash overlay styles */
     #flash-overlay {
       position: fixed;
@@ -76,44 +78,255 @@
       80% { opacity: 1; }
       100% { opacity: 0; }
     }
-    /*ปุ่ม*/
-    .button-container {
+
+    .type-content {
       display: flex;
       justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      margin: 40px 0 40px 0;
+      flex-wrap: wrap;
+    }
+    .type-card {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 40px; /* ระยะห่างระหว่างปุ่มเท่ากัน */
-      flex-wrap: wrap; /* ถ้าหน้าจอเล็กจะขึ้นบรรทัดใหม่ */
-      max-width: 90%; /* ป้องกันไม่ให้ล้นขอบจอ */
-    }
-
-    /* ปุ่ม */
-    .filter-btn {
-      border: 2px solid #555;
-      background-color: transparent;
-      color: #333;
-      font-weight: bold;
-      font-size: 16px;
-      padding: 12px 35px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      min-width: 160px; /* ให้ขนาดปุ่มเท่ากัน */
+      width: 180px;
       text-align: center;
+      text-decoration: none;
+      color: #333;
+      transition: transform 0.15s;
+    }
+    .type-card:hover {
+      transform: translateY(-6px) scale(1.04);
+      color: #866953;
+    }
+    .type-card img {
+      width: 200px;
+      height: 110px;
+      object-fit: contain;
+      margin-bottom: 16px;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .type-card-title {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+    @media (max-width: 900px) {
+      .type-content {
+        gap: 24px;
+      }
+      .type-card {
+        width: 44vw;
+        min-width: 140px;
+      }
     }
 
-    /* เมื่อเอาเมาส์ชี้ */
-    .filter-btn:hover {
-      background-color: #f0f0f0;
+    .slide-sell-list {
+      width: 100%;
+      padding: 15px 45px 15px 45px;
+      background-color: #fff;
+    }
+    .sell-slide-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    .sell-slide-list {
+      display: flex;
+      gap: 32px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+    }
+    .sell-card {
+      flex: 0 0 320px;
+      background: linear-gradient(to bottom, #fff 80%, #f3f4f6 100%);
+      border-radius: 24px;
+      box-shadow: 0 2px 12px #0001;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .sell-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 24px 24px 0 0;
+    }
+    .sell-card-body {
+      width: 100%;
+      padding: 18px 18px 12px 18px;
+      background: #f3f4f6;
+      border-radius: 0 0 24px 24px;
+      text-align: left;
+    }
+    .sell-card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #222;
+    }
+    .sell-card-detail {
+      font-size: 0.98rem;
+      color: #666;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sell-card-price {
+      font-weight: bold;
+      color: #444;
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+    .sell-slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      background: #fff;
+      border: none;
+      box-shadow: 0 2px 8px #0002;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.92;
+    }
+    .sell-slide-btn.left { left: 0; }
+    .sell-slide-btn.right { right: 0; }
+    .sell-slide-btn svg { width: 28px; height: 28px; }
+    @media (max-width: 900px) {
+      .sell-card { flex: 0 0 80vw; }
+      .sell-slide-list { gap: 16px; }
     }
 
-    /* ปุ่มที่ถูกเลือก */
-    .filter-btn.active {
-      background-color: #ccc;
-      border-color: #555;
+    .accessories-section {
+      width: 100%;
+      padding: 15px 45px 15px 45px;
+      background-color: #fff;
     }
+    .accessories-slide-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    .accessories-slide-list {
+      display: flex;
+      gap: 32px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+    }
+    .accessories-card {
+      flex: 0 0 320px;
+      background: linear-gradient(to bottom, #fff 80%, #f3f4f6 100%);
+      border-radius: 24px;
+      box-shadow: 0 2px 12px #0001;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .accessories-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 24px 24px 0 0;
+    }
+    .accessories-card-body {
+      width: 100%;
+      padding: 18px 18px 12px 18px;
+      background: #f3f4f6;
+      border-radius: 0 0 24px 24px;
+      text-align: left;
+    }
+    .accessories-card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #222;
+    }
+    .accessories-card-detail {
+      font-size: 0.98rem;
+      color: #666;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .accessories-card-price {
+      font-weight: bold;
+      color: #444;
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+    .accessories-slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      background: #fff;
+      border: none;
+      box-shadow: 0 2px 8px #0002;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.92;
+    }
+    .accessories-slide-btn.left { left: 0; }
+    .accessories-slide-btn.right { right: 0; }
+    .accessories-slide-btn svg { width: 28px; height: 28px; }
+    @media (max-width: 900px) {
+      .accessories-card { flex: 0 0 80vw; }
+      .accessories-slide-list { gap: 16px; }
+    }
+    .button-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap; /* ให้ปุ่มขึ้นบรรทัดใหม่อัตโนมัติถ้าหน้าจอแคบ */
+  justify-content: center;
+}
 
+.filter-btn {
+  border: 2px solid #555;
+  background-color: transparent;
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.filter-btn.active {
+  background-color: #ccc;
+  border-color: #555;
+}
   </style>
-  <link rel="stylesheet" href="styles.css" />
   <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
     <symbol id="instagram" viewBox="0 0 32 32">
@@ -139,138 +352,244 @@
       fill="#bfc2c6" />
   </symbol>
   </svg>
-<nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
-      aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-      <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
-      <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-        <li class="nav-item">
-          <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="keyboard.html">Keyboards</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
-        </li>
-      </ul>
-      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <!-- Search Icon -->
-        <button class="btn btn-link p-2" style="box-shadow: none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" width="28" height="28">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
-          </svg>
-        </button>
-        <!-- Handbag Icon -->
-        <button class="btn btn-link p-2" style="box-shadow: none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" width="28" height="28">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" />
-          </svg>
-        </button>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+        aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
+        <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="store.html">Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
+          </li>
+        </ul>
+        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+          <!-- Search Icon -->
+          <button class="btn btn-link p-2" style="box-shadow: none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            </svg>
+          </button>
+          <!-- Handbag Icon -->
+          <button class="btn btn-link p-2" style="box-shadow: none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
-<div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
+  </nav>
+  <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 <!-- Body project -->
-<div class="section">
-  <h2>Keyboards</h2>
-    <p class="subtitle">
-      ค้นพบประสบการณ์การพิมพ์รูปแบบใหม่ ที่ผสานความแม่นยำ ความสบาย และความงดงามเข้าด้วยกัน<br />
-      คีย์บอร์ดแต่ละรุ่นถูกออกแบบมาเพื่อมอบความรู้สึกเฉพาะตัว ทั้งสำหรับการทำงานและการเล่นเกม
-    </p>
-</div>
-<div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
-<div class="button-container">
+  <div class="section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
+    <h2>Keyboards</h2>
+      <p class="subtitle">
+        ค้นพบประสบการณ์การพิมพ์รูปแบบใหม่ ที่ผสานความแม่นยำ ความสบาย และความงดงามเข้าด้วยกัน<br />
+        คีย์บอร์ดแต่บะรุ่นถูกออกแบบมาเพื่อมอบความรู้สึกเฉพาะตัว ทั้งสำหรับการทำงานและการเล่นเกม
+      </p>
+  </div>
+  <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
+
+  <div class="button-container">
     <button class="filter-btn active">Mechanical</button>
     <button class="filter-btn">Membrane</button>
     <button class="filter-btn">Gaming</button>
     <button class="filter-btn">Ergonomic</button>
   </div>
-<div class="section">
-    <div class="product-header">
-      <span><strong>New arrived product</strong> the future of typing starts here...</span>
-      <div class="scroll-btn right" onclick="scrollRight()">&#8250;</div>
-      <div class="scroll-btn left" onclick="scrollLeft()">&#8249;</div>
-    </div>
 
-    <div class="product-scroll" id="scrollContainer">
-      <div class="product-card">
-        <img src="store/sell_3.png" alt="Weikav Lucky65 V2 Kit">
-        <p class="title">Weikav Lucky65 V2 Kit</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image2.jpg" alt="Epomaker Galaxy70">
-        <p class="title">Epomaker Galaxy70</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image3.jpg" alt="Leobog Hi98 Pro">
-        <p class="title">Leobog Hi98 Pro</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
-        <p class="title">Akko Mu02 Wooden Series</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
-        <p class="title">Akko Mu02 Wooden Series</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
-        <p class="title">Akko Mu02 Wooden Series</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
-        <p class="title">Akko Mu02 Wooden Series</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
-        <p class="title">Akko Mu02 Wooden Series</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
-      <div class="product-card">
-        <img src="image4.jpg" alt="Akko Mu02 Wooden Series">
-        <p class="title">Akko Mu02 Wooden Series</p>
-        <p class="details">รายละเอียด รายละเอียด รายละเอียด</p>
-        <p class="price">START 0000 BAHT</p>
-      </div>
+  <div class="slide-sell-list" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
+    <p><p style="color: #000; display: inline; font-weight: bold;">Full-size keyboard (100%)</p> complete layout, precise response, and seamless for every task...</p>
+    <div class="sell-slide-container">
+      <button class="sell-slide-btn left" onclick="sellSlide(-1)">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
+      </button>
+      <div class="sell-slide-list" id="sell-slide-list">
+        <div class="sell-card">
+          <img src="store/sell_1.png" alt="Weikav Lucky65 V2 Kit">
+          <div class="sell-card-body">
+            <div class="sell-card-title">Ajazz AK35i V2 Wireless</div>
+            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="sell-card-price">START 0000 BAHT</div>
           </div>
+        </div>
+        <div class="sell-card">
+          <img src="store/sell_2.png" alt="Epomaker Galaxy70">
+          <div class="sell-card-body">
+            <div class="sell-card-title">Corsair K70 PRO RGB</div>
+            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="sell-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="sell-card">
+          <img src="store/sell_3.png" alt="Leobog Hi98 Pro">
+          <div class="sell-card-body">
+            <div class="sell-card-title">HyperX Alloy Origin</div>
+            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="sell-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="sell-card">
+          <img src="store/sell_4.png" alt="Akko Mu02 Wooden Series">
+          <div class="sell-card-body">
+            <div class="sell-card-title">Keychron K10 Hot Swappable</div>
+            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="sell-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="sell-card">
+          <img src="store/sell_5.png" alt="Akko Mu02 Wooden Series">
+          <div class="sell-card-body">
+            <div class="sell-card-title">Akko Mu02 Wooden Series</div>
+            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="sell-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="sell-card">
+          <img src="store/sell_6.png" alt="Akko Mu02 Wooden Series">
+          <div class="sell-card-body">
+            <div class="sell-card-title">Akko Mu02 Wooden Series</div>
+            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="sell-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <!-- เพิ่มสินค้าใหม่ได้ตามต้องการ -->
+      </div>
+      <button class="sell-slide-btn right" onclick="sellSlide(1)">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="#888"/></svg>
+      </button>
+    </div>
   </div>
 
-  <script src="script.js"></script>
-
+  <div class="accessories-section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
+    <p><span style="color: #000; font-weight: bold;">60% keyboard</span> - compact without compromise....</p>
+    <div class="accessories-slide-container">
+      <button class="accessories-slide-btn left" onclick="accessoriesSlide(-1)">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
+      </button>
+      <div class="accessories-slide-list" id="accessories-slide-list">
+        <div class="accessories-card">
+          <img src="store/9.png" alt="Weikav Lucky65 V2 Kit">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Weikav Lucky65 V2 Kit</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/10.png" alt="Epomaker Galaxy70">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Epomaker Galaxy70</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/11.png" alt="Leobog Hi98 Pro">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Leobog Hi98 Pro</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/12.png" alt="Akko Mu02 Wooden Series">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Akko Mu02 Wooden Series</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/sell_5.png" alt="Akko Mu02 Wooden Series">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Akko Mu02 Wooden Series</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <!-- เพิ่มสินค้าใหม่ได้ตามต้องการ -->
+      </div>
+      <button class="accessories-slide-btn right" onclick="accessoriesSlide(1)">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="#888"/></svg>
+      </button>
+    </div>
+  </div>
+    <div class="accessories-section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
+    <p><span style="color: #000; font-weight: bold;">75% keyboard</span> - compact without compromise....</p>
+    <div class="accessories-slide-container">
+      <button class="accessories-slide-btn left" onclick="accessoriesSlide(-1)">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
+      </button>
+      <div class="accessories-slide-list" id="accessories-slide-list">
+        <div class="accessories-card">
+          <img src="store/9.png" alt="Weikav Lucky65 V2 Kit">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Weikav Lucky65 V2 Kit</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/10.png" alt="Epomaker Galaxy70">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Epomaker Galaxy70</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/11.png" alt="Leobog Hi98 Pro">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Leobog Hi98 Pro</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/12.png" alt="Akko Mu02 Wooden Series">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Akko Mu02 Wooden Series</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <div class="accessories-card">
+          <img src="store/sell_5.png" alt="Akko Mu02 Wooden Series">
+          <div class="accessories-card-body">
+            <div class="accessories-card-title">Akko Mu02 Wooden Series</div>
+            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
+            <div class="accessories-card-price">START 0000 BAHT</div>
+          </div>
+        </div>
+        <!-- เพิ่มสินค้าใหม่ได้ตามต้องการ -->
+      </div>
+      <button class="accessories-slide-btn right" onclick="accessoriesSlide(1)">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="#888"/></svg>
+      </button>
+    </div>
+  </div>
 <!-- End Body -->
   <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -302,6 +621,7 @@
       const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
       el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
     }
+
     // Show flash overlay after page load
     window.addEventListener('DOMContentLoaded', function() {
       var overlay = document.getElementById('flash-overlay');
@@ -310,14 +630,30 @@
         overlay.classList.remove('active');
       }, 700); // duration matches animation
     });
-     const buttons = document.querySelectorAll('.filter-btn');
+
+    function sellSlide(dir) {
+      const el = document.getElementById("sell-slide-list");
+      const card = el.querySelector(".sell-card");
+      if (!card) return;
+      const cardWidth = card.offsetWidth + 32; // card + gap
+      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
+    }
+
+    function accessoriesSlide(dir) {
+      const el = document.getElementById("accessories-slide-list");
+      const card = el.querySelector(".accessories-card");
+      if (!card) return;
+      const cardWidth = card.offsetWidth + 32; // card + gap
+      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
+    }
+
+    const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       });
     });
-  
   </script>
   <!-- Flash overlay for page transition -->
   <div id="flash-overlay"></div>
