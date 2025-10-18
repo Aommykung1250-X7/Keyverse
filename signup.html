@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEYVERSE</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style>
+    .carousel-item {
+      min-height: 400px;
+    }
+
+    .navbar .container-fluid {
+      max-width: 1600px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .navbar {
+      min-height: 80px;
+      font-size: 1.25rem;
+    }
+
+    .nav-item {
+      font-size: medium ;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (max-width: 991.98px) {
+    .nav-item {
+      padding-left: 8px;
+      padding-right: 8px;
+      font-size: 0.95rem;
+      }
+    }
+
+    .navbar .navbar-brand {
+      font-size: 2rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .navbar .nav-link {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .navbar .nav-link.active,
+    .navbar .nav-link:focus { 
+      color: #000 !important;
+      font-weight: bold;
+    }
+
+    .btn-link svg {
+      width: 30px !important;
+      height: 30px !important;
+    }
+
+    body {
+      color: #4d4c51;
+    }
+
+    /* Flash overlay styles */
+    #flash-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.25s;
+    }
+    #flash-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      animation: flashAnim 0.7s linear;
+    }
+    @keyframes flashAnim {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .signup-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.signup-section h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4a4747;
+  margin-bottom: 60px;
+  letter-spacing: 1px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.signup-form .input-box {
+  display: flex;
+  align-items: center;
+  background-color: #d9d9d9;
+  border-radius: 50px;
+  padding: 14px 20px;
+  width: 480px;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+.signup-form .input-box i {
+  color: #4a4a4a;
+  font-size: 18px;
+  margin-right: 14px;
+}
+
+.signup-form .input-box input {
+  border: none;
+  background: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+}
+
+.signup-btn {
+  background-color: #3f3e3e;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 80px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.signup-btn:hover {
+  background-color: #2e2d2d;
+}
+
+.login-text {
+  margin-top: 25px;
+  font-size: 15px;
+  color: #4a4a4a;
+  font-family: "Poppins", sans-serif;
+}
+
+.login-text a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+  </style>
+  <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <symbol id="instagram" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <rect x="10" y="10" width="12" height="12" rx="4" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <circle cx="16" cy="16" r="3" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <circle cx="21.2" cy="12.8" r="1" fill="#bfc2c6" />
+    </symbol>
+    <symbol id="facebook" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
+      <path d="M18.5 17.5h2l.5-3h-2.5v-1.5c0-.6.2-1 .8-1H21V9.5h-2c-2 0-2.5 1.2-2.5 2.5V14.5h-1.5v3h1.5V23h3v-5.5z"
+        fill="#bfc2c6" />
+    </symbol>
+  </svg>
+</head>
+
+<body>
+  <circle cx="16" cy="16" r="3" stroke="#bfc2c6" stroke-width="2" fill="none" />
+  <circle cx="21.2" cy="12.8" r="1" fill="#bfc2c6" />
+  <symbol id="facebook" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
+    <path d="M18.5 17.5h2l.5-3h-2.5v-1.5c0-.6.2-1 .8-1H21V9.5h-2c-2 0-2.5 1.2-2.5 2.5V14.5h-1.5v3h1.5V23h3v-5.5z"
+      fill="#bfc2c6" />
+  </symbol>
+  </svg>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+        aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
+        <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
+          </li>
+        </ul>
+        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+          <!-- Search Icon -->
+          <button class="btn btn-link p-2" style="box-shadow: none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            </svg>
+          </button>
+          <!-- Handbag Icon -->
+          <button class="btn btn-link p-2" style="box-shadow: none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
+  <!-- Body -->
+  <section class="signup-section">
+  <h1>SIGN UP</h1>
+
+  <form class="signup-form">
+    <div class="input-box">
+      <i class="fa-solid fa-user"></i>
+      <input type="text" placeholder="Username" required>
+    </div>
+
+    <div class="input-box">
+      <i class="fa-solid fa-envelope"></i>
+      <input type="email" placeholder="E - mail" required>
+    </div>
+
+    <div class="input-box">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" placeholder="Password" required>
+    </div>
+
+    <div class="input-box">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" placeholder="Confirm Password" required>
+    </div>
+
+    <button type="submit" class="signup-btn">CREATE AN ACCOUNT</button>
+
+    <p class="login-text">
+      Already have an account ? <a href="#">Login here</a>
+    </p>
+  </form>
+</section>
+  
+  <!-- End Product Section -->
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+      </div>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#" aria-label="Instagram">
+            <svg class="bi" width="24" height="24" aria-hidden="true">
+              <use xlink:href="#instagram"></use>
+            </svg>
+          </a>
+
+        </li>
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24">
+              <use xlink:href="#facebook"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </footer>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script>
+    function scrollProduct(dir) {
+      const el = document.getElementById("product-scroll");
+      const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
+      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
+    }
+    // Show flash overlay after page load
+    window.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('flash-overlay');
+      overlay.classList.add('active');
+      setTimeout(function() {
+        overlay.classList.remove('active');
+      }, 700); // duration matches animation
+    });
+  </script>
+  <!-- Flash overlay for page transition -->
+  <div id="flash-overlay"></div>
+  </script>
+</body>
+
+</html>
