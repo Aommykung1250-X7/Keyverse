@@ -80,7 +80,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
         <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a> <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link active" href="store.php">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.php">Keyboards</a>

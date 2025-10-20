@@ -31,7 +31,13 @@ include 'connectdb.php';
     .navbar .dropdown-menu { font-size: 1rem; }
 
     /* (CSS ของ Keyboard Page - เหมือนเดิม) */
-    .button-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; } 
+    .button-container {
+      display: flex;
+      gap: 220px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
     .filter-btn { border: 2px solid #555; background-color: transparent; color: #333; font-weight: bold; font-size: 16px; padding: 10px 30px; border-radius: 50px; cursor: pointer; text-decoration: none; transition: all 0.2s ease; min-width: 150px; text-align: center; }
     .filter-btn:hover { background-color: #f0f0f0; }
     .filter-btn.active { background-color: #ccc; border-color: #555; }
@@ -143,10 +149,10 @@ include 'connectdb.php';
   <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 
   <div class="button-container">
-    <a href="keyboard.php" class="filter-btn active">Mechanical</a> 
-    <a href="membrane.php" class="filter-btn">Membrane</a> 
-    <a href="gaming.php" class="filter-btn">Gaming</a>    
-    <a href="ergonomic.php" class="filter-btn ">Ergonomic</a> 
+    <a href="keyboard.php" class="filter-btn active">Mechanical</a>
+    <a href="membrane.php" class="filter-btn">Membrane</a>
+    <a href="gaming.php" class="filter-btn">Gaming</a>
+    <a href="ergonomic.php" class="filter-btn">Ergonomic</a>
   </div>
 
   <div class="slide-section">
