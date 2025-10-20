@@ -144,7 +144,25 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
   </nav>
 
   <div class="container my-5">
-    <h2>Your Shopping Cart</h2><hr>
+    <h2>Your Shopping Cart</h2>
+    <hr>
+
+    <?php
+      if (isset($_SESSION['message'])) {
+        $message_type_class = 'alert-danger'; 
+        if (isset($_SESSION['message_type'])) {
+            if ($_SESSION['message_type'] === 'success') { $message_type_class = 'alert-success'; } 
+            elseif ($_SESSION['message_type'] === 'warning') { $message_type_class = 'alert-warning'; } 
+            elseif ($_SESSION['message_type'] === 'info') { $message_type_class = 'alert-info'; }
+        }
+        echo '<div class="alert ' . $message_type_class . ' alert-dismissible fade show" role="alert">
+                ' . htmlspecialchars($_SESSION['message']) . '
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+        unset($_SESSION['message']);
+        unset($_SESSION['message_type']);
+      }
+    ?>
     <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
       <div class="row g-4">
         <div class="col-lg-8">

@@ -151,7 +151,7 @@ include 'connectdb.php';
   <div class="button-container">
     <a href="keyboard.php" class="filter-btn active">Mechanical</a>
     <a href="membrane.php" class="filter-btn">Membrane</a>
-    <a href="gaming.php" class="filter-btn">Gaming</a>
+    <a href="gaming.php" class="filter-btn ">Gaming</a>
     <a href="ergonomic.php" class="filter-btn">Ergonomic</a>
   </div>
 

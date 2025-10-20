@@ -180,6 +180,30 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
   </nav>
 
   <div class="container my-5">
+    <?php
+      if (isset($_SESSION['message'])) {
+        // ใช้คลาส alert ของ Bootstrap
+        $message_type_class = 'alert-danger'; // สีแดง (Error) เป็นค่าเริ่มต้น
+        if (isset($_SESSION['message_type'])) {
+            if ($_SESSION['message_type'] === 'success') {
+                $message_type_class = 'alert-success'; // สีเขียว
+            } elseif ($_SESSION['message_type'] === 'warning') {
+                $message_type_class = 'alert-warning'; // สีเหลือง
+            } elseif ($_SESSION['message_type'] === 'info') {
+                $message_type_class = 'alert-info'; // สีฟ้า
+            }
+        }
+        
+        echo '<div class="alert ' . $message_type_class . ' alert-dismissible fade show" role="alert">
+                ' . htmlspecialchars($_SESSION['message']) . '
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+        
+        // เคลียร์ข้อความหลังจากแสดงผล (สำคัญมาก!)
+        unset($_SESSION['message']);
+        unset($_SESSION['message_type']);
+      }
+    ?>
     <div class="row g-5">
       
       <div class="col-md-6 text-center">
@@ -221,7 +245,6 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
             <i class="fa-solid fa-cart-plus me-2"></i> 
             <?php echo ($product['stock_quantity'] <= 0) ? 'Out of Stock' : 'Add to Cart'; ?>
           </button>
-
         </form>
         </div>
     </div> </div> <div class="container"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Instagram"> <svg class="bi" width="24" height="24" aria-hidden="true"> <use xlink:href="#instagram"></use> </svg> </a> </li> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"> <use xlink:href="#facebook"></use> </svg> </a> </li> </ul> </footer></div>
