@@ -438,25 +438,25 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a>
         <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="keyboard.html">Keyboards</a>
+            <a class="nav-link active" href="keyboard.php">Keyboards</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.php">Switches</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
           </li>
         </ul>
         <div class="d-lg-flex col-lg-3 justify-content-lg-end">
@@ -492,70 +492,70 @@
   <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 
   <div class="button-container">
-    <a href="keyboard.html" class="filter-btn ">Mechanical</a>
-    <a href="membrane.html" class="filter-btn ">Membrane</a>
-    <a href="gaming.html" class="filter-btn active">Gaming</a>
-    <a href="ergonomic.html" class="filter-btn ">Ergonomic</a>
+    <a href="keyboard.php" class="filter-btn ">Mechanical</a>
+    <a href="membrane.php" class="filter-btn active">Membrane</a>
+    <a href="gaming.php" class="filter-btn">Gaming</a>
+    <a href="ergonomic.php" class="filter-btn ">Ergonomic</a>
   </div>
 
  <section class="keyboard-section">
-    <h2>Victory begins with your keyboard <span>— choose the one built for champions...</span></h2>
+    <h2>Built for comfort, <span> designed for silence - that's the power of a membrane keyboard</span></h2>
 
     <div class="product-container">
       <div class="product-card">
-        <img src="keyboard/gaming/1.png" alt="Womier S-K80 75% RGB">
-        <h3>Womier S-K80 75% RGB</h3>
+        <img src="keyboard/membrane/1.png" alt="Nubwo NK55">
+        <h3>Nubwo NK55</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 1990 BAHT</span>
+        <span class="price">START 940 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/gaming/2.png" alt="Rk Royal Kludge RK290">
-        <h3>RK Royal Kludge RK920</h3>
+        <img src="keyboard/membrane/2.png" alt="Razer Cynosa V2">
+        <h3>Razer Cynosa V2</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 2090 BAHT</span>
+        <span class="price">START 1790 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/gaming/3.png" alt="ASUS TUF Gaming K1">
+        <img src="keyboard/membrane/3.png" alt="HyperX Alloy Core RGB">
         <h3>ASUS TUF Gaming K1</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 990 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/membrane/4.png" alt="ElECOM USB Membrane">
+        <h3>ElECOM USB Membrane</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
         <span class="price">START 1090 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/gaming/4.png" alt="AULA F75 Gasket RGB">
-        <h3>AULA F75 Gasket RGB</h3>
+        <img src="keyboard/membrane/5.png" alt="Razer Ornata V3">
+        <h3>Razer Ornata V3</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 1590 BAHT</span>
+        <span class="price">START 2190 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/gaming/5.png" alt="Gravastar Mercury K1">
-        <h3>Gravastar Mercury K1</h3>
+        <img src="keyboard/membrane/6.png" alt="TECHPRO Membrane">
+        <h3>TECHPRO MembraneB</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 3990 BAHT</span>
+        <span class="price">START 290 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/gaming/6.png" alt="Royal Kludge R87">
-        <h3>Royal Kludge R87</h3>
+        <img src="keyboard/membrane/7.png" alt="AULA F3010">
+        <h3>AULA F3010</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 1390 BAHT</span>
+        <span class="price">START 590 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/gaming/7.png" alt="Pyro ROC12622">
-        <h3>Pyro ROC12622</h3>
+        <img src="keyboard/membrane/8.png" alt="Razer Ornata V3 X">
+        <h3>Razer Ornata V3 X</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 3790 BAHT</span>
-      </div>
-
-      <div class="product-card">
-        <img src="keyboard/gaming/8.png" alt="MG108B Watermelon Edition">
-        <h3>MG108B Watermelon Edition</h3>
-        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 3890 BAHT</span>
+        <span class="price">START 1090 BAHT</span>
       </div>
     </div>
   </section>

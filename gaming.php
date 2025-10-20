@@ -438,25 +438,25 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a>
         <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="keyboard.html">Keyboards</a>
+            <a class="nav-link active" href="keyboard.php">Keyboards</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.php">Switches</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
           </li>
         </ul>
         <div class="d-lg-flex col-lg-3 justify-content-lg-end">
@@ -492,70 +492,70 @@
   <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 
   <div class="button-container">
-    <a href="keyboard.html" class="filter-btn ">Mechanical</a>
-    <a href="membrane.html" class="filter-btn ">Membrane</a>
-    <a href="gaming.html" class="filter-btn ">Gaming</a>
-    <a href="ergonomic.html" class="filter-btn active">Ergonomic</a>
+    <a href="keyboard.php" class="filter-btn ">Mechanical</a>
+    <a href="membrane.php" class="filter-btn ">Membrane</a>
+    <a href="gaming.php" class="filter-btn active">Gaming</a>
+    <a href="ergonomic.php" class="filter-btn ">Ergonomic</a>
   </div>
 
  <section class="keyboard-section">
-    <h2>Work smarter, type healthier <span>meet the ergonomic keyboard made for comfort...</span></h2>
+    <h2>Victory begins with your keyboard <span>— choose the one built for champions...</span></h2>
 
     <div class="product-container">
       <div class="product-card">
-        <img src="keyboard/ergonomic/1.png" alt="Glove80 Ergonomic Rev2">
-        <h3>Glove80 Ergonomic Rev2</h3>
+        <img src="keyboard/gaming/1.png" alt="Womier S-K80 75% RGB">
+        <h3>Womier S-K80 75% RGB</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 12590 BAHT</span>
+        <span class="price">START 1990 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/ergonomic/2.png" alt="Kinesis Advantage2">
-        <h3>Kinesis Advantage2</h3>
-        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 15590 BAHT</span>
-      </div>
-
-      <div class="product-card">
-        <img src="keyboard/ergonomic/3.png" alt="Logitech Wave Keys wireless">
-        <h3>ogitech Wave Keys wireless</h3>
+        <img src="keyboard/gaming/2.png" alt="Rk Royal Kludge RK290">
+        <h3>RK Royal Kludge RK920</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
         <span class="price">START 2090 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/ergonomic/4.png" alt="Kensing Pro Fit Ergo">
-        <h3>Kensing Pro Fit Ergo</h3>
+        <img src="keyboard/gaming/3.png" alt="ASUS TUF Gaming K1">
+        <h3>ASUS TUF Gaming K1</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 3590 BAHT</span>
+        <span class="price">START 1090 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/ergonomic/5.png" alt="MOFII Ergonomic keyboard">
-        <h3>MOFII Ergonomic keyboard</h3>
+        <img src="keyboard/gaming/4.png" alt="AULA F75 Gasket RGB">
+        <h3>AULA F75 Gasket RGB</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 1290 BAHT</span>
+        <span class="price">START 1590 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/ergonomic/6.png" alt="Ajazz AKS068 Wired Sea Salt Switch">
-        <h3>Ajazz AKS068 Wired Sea Salt Switch</h3>
-        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 790 BAHT</span>
-      </div>
-
-      <div class="product-card">
-        <img src="keyboard/ergonomic/7.png" alt="Lenovo Go Wireless Split">
-        <h3>Lenovo Go Wireless Split</h3>
+        <img src="keyboard/gaming/5.png" alt="Gravastar Mercury K1">
+        <h3>Gravastar Mercury K1</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
         <span class="price">START 3990 BAHT</span>
       </div>
 
       <div class="product-card">
-        <img src="keyboard/ergonomic/8.png" alt="AULA LEOBOG A75">
-        <h3>AULA LEOBOG A75</h3>
+        <img src="keyboard/gaming/6.png" alt="Royal Kludge R87">
+        <h3>Royal Kludge R87</h3>
         <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
-        <span class="price">START 2990 BAHT</span>
+        <span class="price">START 1390 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/gaming/7.png" alt="Pyro ROC12622">
+        <h3>Pyro ROC12622</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 3790 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/gaming/8.png" alt="MG108B Watermelon Edition">
+        <h3>MG108B Watermelon Edition</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 3890 BAHT</span>
       </div>
     </div>
   </section>

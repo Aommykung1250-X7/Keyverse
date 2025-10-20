@@ -299,6 +299,112 @@
       .accessories-card { flex: 0 0 80vw; }
       .accessories-slide-list { gap: 16px; }
     }
+   .button-container {
+      display: flex;
+      gap: 220px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      border: 2px solid #555;
+      background-color: transparent;
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 12px 35px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .filter-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .filter-btn.active {
+      background-color: #ccc;
+      border-color: #555;
+    }
+    /* ส่วนหัว */
+.keyboard-section {
+  text-align: left;
+  padding: 40px 100px;
+}
+
+.keyboard-section h2 {
+  font-size: 1.5rem;
+  color: #111;
+  font-weight: 700;
+}
+
+.keyboard-section h2 span {
+  color: #888;
+  font-weight: 400;
+}
+
+/* กล่องรวมสินค้า */
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* ✅ ให้อยู่กลางแนวนอน */
+  gap: 50px;               /* ✅ ระยะห่างระหว่างสินค้า */
+  max-width: 1200px;       /* ✅ จำกัดความกว้าง */
+  margin: 40px auto;       /* ✅ จัดให้อยู่กลางหน้า */
+}
+
+/* การ์ดสินค้า */
+.product-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 260px;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 360px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* รูปสินค้า */
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* ชื่อสินค้า */
+.product-card h3 {
+  font-size: 1rem;
+  margin: 10px 15px 0;
+  color: #222;
+  min-height: 40px;
+}
+
+/* รายละเอียด */
+.product-card p {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 5px 15px;
+  min-height: 35px;
+}
+
+/* ราคา */
+.product-card .price {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 15px 15px;
+}
   </style>
   <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
@@ -332,25 +438,25 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a>
         <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link active" href="store.html">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
+            <a class="nav-link active" href="keyboard.php">Keyboards</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.php">Switches</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
           </li>
         </ul>
         <div class="d-lg-flex col-lg-3 justify-content-lg-end">
@@ -377,153 +483,84 @@
   <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 <!-- Body project -->
   <div class="section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
-    <h2>Store</h2>
+    <h2>Keyboards</h2>
       <p class="subtitle">
-        ยินดีต้อนรับสู่ KEYVERSE ร้านค้าออนไลน์ที่คุณจะได้พบกับอุปกรณ์คีย์บอร์ดคุณภาพสูง<br />
-        ไม่ว่าคุณจะเป็นนักพิมพ์ นักเล่นเกม หรือผู้ที่ชื่นชอบการปรับแต่งคีย์บอร์ด เรามีทุกสิ่งที่คุณต้องการ
+        ค้นพบประสบการณ์การพิมพ์รูปแบบใหม่ ที่ผสานความแม่นยำ ความสบาย และความงดงามเข้าด้วยกัน<br />
+        คีย์บอร์ดแต่บะรุ่นถูกออกแบบมาเพื่อมอบความรู้สึกเฉพาะตัว ทั้งสำหรับการทำงานและการเล่นเกม
       </p>
   </div>
   <div class="d-flex flex-wrap justify-content-between align-items-center py-2 my-1 border-top "></div>
 
-  <div class="type-content">
-    <a href="keyboard.html" class="type-card">
-      <img src="store/01_head.png" alt="Keyboards" />
-      <div class="type-card-title">Keyboards</div>
-    </a>
-    <a href="switches.html" class="type-card">
-      <img src="store/02_head.png" alt="Switches" />
-      <div class="type-card-title">Switches</div>
-    </a>
-    <a href="keycap.html" class="type-card">
-      <img src="store/03_head.png" alt="Keycaps" />
-      <div class="type-card-title">Keycaps</div>
-    </a>
-    <a href="accessories.html" class="type-card">
-      <img src="store/04_head.png" alt="Accessories" />
-      <div class="type-card-title">Accessories</div>
-    </a>
-    <a href="modding.html" class="type-card">
-      <img src="store/05_head.png" alt="DIY / Modding" />
-      <div class="type-card-title">DIY / Modding</div>
-    </a>
+  <div class="button-container">
+    <a href="keyboard.php" class="filter-btn ">Mechanical</a>
+    <a href="membrane.php" class="filter-btn ">Membrane</a>
+    <a href="gaming.php" class="filter-btn ">Gaming</a>
+    <a href="ergonomic.php" class="filter-btn active">Ergonomic</a>
   </div>
 
-  <div class="slide-sell-list" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
-    <p><p style="color: #000; display: inline; font-weight: bold;">New arrived product</p> the future of typing starts here...</p>
-    <div class="sell-slide-container">
-      <button class="sell-slide-btn left" onclick="sellSlide(-1)">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
-      </button>
-      <div class="sell-slide-list" id="sell-slide-list">
-        <div class="sell-card">
-          <img src="store/sell_1.png" alt="Weikav Lucky65 V2 Kit">
-          <div class="sell-card-body">
-            <div class="sell-card-title">Weikav Lucky65 V2 Kit</div>
-            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="sell-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="sell-card">
-          <img src="store/sell_2.png" alt="Epomaker Galaxy70">
-          <div class="sell-card-body">
-            <div class="sell-card-title">Epomaker Galaxy70</div>
-            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="sell-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="sell-card">
-          <img src="store/sell_3.png" alt="Leobog Hi98 Pro">
-          <div class="sell-card-body">
-            <div class="sell-card-title">Leobog Hi98 Pro</div>
-            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="sell-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="sell-card">
-          <img src="store/sell_4.png" alt="Akko Mu02 Wooden Series">
-          <div class="sell-card-body">
-            <div class="sell-card-title">Akko Mu02 Wooden Series</div>
-            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="sell-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="sell-card">
-          <img src="store/sell_5.png" alt="Akko Mu02 Wooden Series">
-          <div class="sell-card-body">
-            <div class="sell-card-title">Akko Mu02 Wooden Series</div>
-            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="sell-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="sell-card">
-          <img src="store/sell_6.png" alt="Akko Mu02 Wooden Series">
-          <div class="sell-card-body">
-            <div class="sell-card-title">Akko Mu02 Wooden Series</div>
-            <div class="sell-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="sell-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <!-- เพิ่มสินค้าใหม่ได้ตามต้องการ -->
-      </div>
-      <button class="sell-slide-btn right" onclick="sellSlide(1)">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="#888"/></svg>
-      </button>
-    </div>
-  </div>
+ <section class="keyboard-section">
+    <h2>Work smarter, type healthier <span>meet the ergonomic keyboard made for comfort...</span></h2>
 
-  <div class="accessories-section" style="width: 100%; padding: 15px 45px 15px 45px; background-color: #fff;">
-    <p><span style="color: #000; font-weight: bold;">Accessories</span> elevate every keystroke...</p>
-    <div class="accessories-slide-container">
-      <button class="accessories-slide-btn left" onclick="accessoriesSlide(-1)">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" fill="#888"/></svg>
-      </button>
-      <div class="accessories-slide-list" id="accessories-slide-list">
-        <div class="accessories-card">
-          <img src="store/9.png" alt="Weikav Lucky65 V2 Kit">
-          <div class="accessories-card-body">
-            <div class="accessories-card-title">Weikav Lucky65 V2 Kit</div>
-            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="accessories-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="accessories-card">
-          <img src="store/10.png" alt="Epomaker Galaxy70">
-          <div class="accessories-card-body">
-            <div class="accessories-card-title">Epomaker Galaxy70</div>
-            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="accessories-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="accessories-card">
-          <img src="store/11.png" alt="Leobog Hi98 Pro">
-          <div class="accessories-card-body">
-            <div class="accessories-card-title">Leobog Hi98 Pro</div>
-            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="accessories-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="accessories-card">
-          <img src="store/12.png" alt="Akko Mu02 Wooden Series">
-          <div class="accessories-card-body">
-            <div class="accessories-card-title">Akko Mu02 Wooden Series</div>
-            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="accessories-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <div class="accessories-card">
-          <img src="store/sell_5.png" alt="Akko Mu02 Wooden Series">
-          <div class="accessories-card-body">
-            <div class="accessories-card-title">Akko Mu02 Wooden Series</div>
-            <div class="accessories-card-detail">รายละเอียด รายละเอียด รายละเอียด รายละเอียด</div>
-            <div class="accessories-card-price">START 0000 BAHT</div>
-          </div>
-        </div>
-        <!-- เพิ่มสินค้าใหม่ได้ตามต้องการ -->
+    <div class="product-container">
+      <div class="product-card">
+        <img src="keyboard/ergonomic/1.png" alt="Glove80 Ergonomic Rev2">
+        <h3>Glove80 Ergonomic Rev2</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 12590 BAHT</span>
       </div>
-      <button class="accessories-slide-btn right" onclick="accessoriesSlide(1)">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="#888"/></svg>
-      </button>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/2.png" alt="Kinesis Advantage2">
+        <h3>Kinesis Advantage2</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 15590 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/3.png" alt="Logitech Wave Keys wireless">
+        <h3>ogitech Wave Keys wireless</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 2090 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/4.png" alt="Kensing Pro Fit Ergo">
+        <h3>Kensing Pro Fit Ergo</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 3590 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/5.png" alt="MOFII Ergonomic keyboard">
+        <h3>MOFII Ergonomic keyboard</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 1290 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/6.png" alt="Ajazz AKS068 Wired Sea Salt Switch">
+        <h3>Ajazz AKS068 Wired Sea Salt Switch</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 790 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/7.png" alt="Lenovo Go Wireless Split">
+        <h3>Lenovo Go Wireless Split</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 3990 BAHT</span>
+      </div>
+
+      <div class="product-card">
+        <img src="keyboard/ergonomic/8.png" alt="AULA LEOBOG A75">
+        <h3>AULA LEOBOG A75</h3>
+        <p>รายละเอียด รายละเอียด รายละเอียด รายละเอียด</p>
+        <span class="price">START 2990 BAHT</span>
+      </div>
     </div>
+  </section>
+
+
   </div>
 <!-- End Body -->
   <div class="container">
@@ -549,42 +586,6 @@
       </ul>
     </footer>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script>
-    function scrollProduct(dir) {
-      const el = document.getElementById("product-scroll");
-      const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
-      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
-    }
-
-    // Show flash overlay after page load
-    window.addEventListener('DOMContentLoaded', function() {
-      var overlay = document.getElementById('flash-overlay');
-      overlay.classList.add('active');
-      setTimeout(function() {
-        overlay.classList.remove('active');
-      }, 700); // duration matches animation
-    });
-
-    function sellSlide(dir) {
-      const el = document.getElementById("sell-slide-list");
-      const card = el.querySelector(".sell-card");
-      if (!card) return;
-      const cardWidth = card.offsetWidth + 32; // card + gap
-      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
-    }
-
-    function accessoriesSlide(dir) {
-      const el = document.getElementById("accessories-slide-list");
-      const card = el.querySelector(".accessories-card");
-      if (!card) return;
-      const cardWidth = card.offsetWidth + 32; // card + gap
-      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
-    }
-  </script>
-  <!-- Flash overlay for page transition -->
-  <div id="flash-overlay"></div>
-  </script>
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+<?php session_start(); // **1. เริ่ม Session เพื่อเช็กสถานะล็อกอิน** ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KEYVERSE</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
   <style>
     .carousel-item {
       min-height: 400px;
@@ -50,8 +54,8 @@
 
     .navbar .nav-link.active,
     .navbar .nav-link:focus {
-      color: #866953 !important;
-      font-weight: 400;
+      color: #000 !important;
+      font-weight: bold;
     }
 
     .btn-link svg {
@@ -83,8 +87,17 @@
       80% { opacity: 1; }
       100% { opacity: 0; }
     }
+    
+    /* Style สำหรับ Dropdown ที่เราเพิ่มเข้ามา */
+    .navbar .dropdown-toggle {
+        color: #4d4c51;
+        font-weight: 400;
+        font-size: 1.1rem; /* ขนาดตัวอักษรของชื่อ */
+    }
+    .navbar .dropdown-menu {
+        font-size: 1rem;
+    }
   </style>
-  <!-- SVG ICONS FOR FOOTER SOCIALS (Outlined in circle) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
     <symbol id="instagram" viewBox="0 0 32 32">
       <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
@@ -101,14 +114,6 @@
 </head>
 
 <body>
-  <circle cx="16" cy="16" r="3" stroke="#bfc2c6" stroke-width="2" fill="none" />
-  <circle cx="21.2" cy="12.8" r="1" fill="#bfc2c6" />
-  <symbol id="facebook" viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="15" stroke="#bfc2c6" stroke-width="2" fill="none" />
-    <path d="M18.5 17.5h2l.5-3h-2.5v-1.5c0-.6.2-1 .8-1H21V9.5h-2c-2 0-2.5 1.2-2.5 2.5V14.5h-1.5v3h1.5V23h3v-5.5z"
-      fill="#bfc2c6" />
-  </symbol>
-  </svg>
   <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
@@ -116,49 +121,91 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.html">KEYVERSE</a>
-        <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a> <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.html">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.html">Keyboards</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.php">Keyboards</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.html">Switches</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.php">Switches</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.html">Keycaps</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.html">Accessories</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.html">DIY / Modding</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
           </li>
         </ul>
-        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-          <!-- Search Icon -->
-          <button class="btn btn-link p-2" style="box-shadow: none">
+        
+        <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
+          <a href="search.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Search">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" width="28" height="28">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
             </svg>
-          </button>
-          <!-- Handbag Icon -->
-          <button class="btn btn-link p-2" style="box-shadow: none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" width="28" height="28">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" />
+          </a>
+          <?php
+          // คำนวณจำนวนสินค้าในตะกร้า (นับรวมทุกชิ้น ไม่ใช่แค่ประเภท)
+          $cart_count = 0;
+          if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+              foreach ($_SESSION['cart'] as $item) {
+                  $cart_count += $item['quantity']; // นับตามจำนวน (quantity)
+              }
+          }
+          ?>
+          <a href="cart.php" id="cart-icon-nav" class="btn btn-link p-2 position-relative" style="box-shadow: none" aria-label="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" />
             </svg>
-          </button>
+            <?php if ($cart_count > 0): // ถ้ามีสินค้าในตะกร้า ?>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <?php echo $cart_count; ?>
+                <span class="visually-hidden">items in cart</span>
+              </span>
+            <?php endif; ?>
+          </a>
+
+          <?php if (isset($_SESSION['user_id'])): // --- ถ้าล็อกอินแล้ว --- ?>
+            
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user me-1"></i> <?php echo htmlspecialchars($_SESSION['username']); // แสดงชื่อ User ?>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <?php if ($_SESSION['role'] === 'admin'): // ถ้าเป็นแอดมิน ให้มีลิงก์ไป Dashboard ?>
+                  <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                <?php endif; ?>
+                <li><a class="dropdown-item" href="profile.php">My Account</a></li>
+                <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+              </ul>
+            </div>
+
+          <?php else: // --- ถ้ายังไม่ล็อกอิน --- ?>
+
+            <a href="login.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Login/Register">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
+                stroke="currentColor" width="28" height="28">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A1.875 1.875 0 0118.375 22.5H5.625a1.875 1.875 0 01-1.124-2.382z" />
+              </svg>
+            </a>
+
+          <?php endif; // --- จบการเช็ก --- ?>
+
         </div>
       </div>
     </div>
   </nav>
-  <!-- slide -->
+  
   <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-interval="8000">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
@@ -222,9 +269,6 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <!-- slide end -->
-  <!-- Product Section -->
-  <!-- Featured Products (2 items) -->
   <div style="
         background: linear-gradient(to bottom, #e5e7eb 0%, #fff 100%);
         padding: 40px 0 40px 0;
@@ -239,7 +283,6 @@
         PRODUCT
       </h2>
       <div class="d-flex justify-content-center gap-5 flex-wrap">
-        <!-- Card 1 -->
         <div class="d-flex flex-column align-items-center" style="width: 600px">
           <div style="
                 width: 100%;
@@ -258,7 +301,6 @@
             ราคา 0000
           </div>
         </div>
-        <!-- Card 2 -->
         <div class="d-flex flex-column align-items-center" style="width: 600px">
           <div style="
                 width: 100%;
@@ -300,7 +342,6 @@
       </div>
       <div class="position-relative">
         <div id="product-scroll" class="d-flex flex-nowrap overflow-auto pb-3" style="scroll-behavior: smooth">
-          <!-- Product Card 1 -->
           <div class="card me-4 flex-shrink-0" style="
                 width: 240px;
                 border-radius: 24px;
@@ -315,94 +356,7 @@
               <div class="text-muted mb-2">ราคา 0000</div>
             </div>
           </div>
-          <!-- Product Card 2 -->
-          <div class="card me-4 flex-shrink-0" style="
-                width: 240px;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-              ">
-            <img src="img/keyboard2.jpg" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
-            <div class="card-body text-center p-3" style="color: #4d4c51">
-              <div class="fw-bold" style="font-size: 1.1rem">KEYCAP NAME</div>
-              <div class="text-muted mb-2">ราคา 0000</div>
-            </div>
           </div>
-          <!-- Product Card 3 -->
-          <div class="card me-4 flex-shrink-0" style="
-                width: 240px;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-              ">
-            <img src="img/keyboard3.jpg" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
-            <div class="card-body text-center p-3" style="color: #4d4c51">
-              <div class="fw-bold" style="font-size: 1.1rem">
-                Mechanical Keyboard
-              </div>
-              <div class="text-muted mb-2">
-                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
-              </div>
-              <div class="fw-bold">START 0000 BAHT</div>
-            </div>
-          </div>
-          <!-- Product Card 4 -->
-          <div class="card me-4 flex-shrink-0" style="
-                width: 240px;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-              ">
-            <img src="img/header.png" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
-            <div class="card-body text-center p-3" style="color: #4d4c51">
-              <div class="fw-bold" style="font-size: 1.1rem">
-                Membrane Keyboard
-              </div>
-              <div class="text-muted mb-2">
-                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
-              </div>
-              <div class="fw-bold">START 0000 BAHT</div>
-            </div>
-          </div>
-          <!-- Product Card 5 -->
-          <div class="card me-4 flex-shrink-0" style="
-                width: 240px;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-              ">
-            <img src="img/header1.png" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
-            <div class="card-body text-center p-3" style="color: #4d4c51">
-              <div class="fw-bold" style="font-size: 1.1rem">
-                Ergonomic Keyboard
-              </div>
-              <div class="text-muted mb-2">
-                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
-              </div>
-              <div class="fw-bold">START 0000 BAHT</div>
-            </div>
-          </div>
-          <!-- Product Card 6 -->
-          <div class="card me-4 flex-shrink-0" style="
-                width: 240px;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-              ">
-            <img src="img/header1.png" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
-            <div class="card-body text-center p-3" style="color: #4d4c51">
-              <div class="fw-bold" style="font-size: 1.1rem">
-                Ergonomic Keyboard
-              </div>
-              <div class="text-muted mb-2">
-                รายละเอียด รายละเอียด รายละเอียด รายละเอียด
-              </div>
-              <div class="fw-bold">START 0000 BAHT</div>
-            </div>
-          </div>
-          <!-- Add more cards here if needed -->
-        </div>
-        <!-- Scroll Buttons -->
         <button onclick="scrollProduct(-1)" class="btn btn-light position-absolute top-50 start-0 translate-middle-y"
           style="
               z-index: 2;
@@ -438,7 +392,6 @@
       </div>
     </div>
   </div>
-  <!-- End Product Section -->
   <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
       <div class="col-md-4 d-flex align-items-center">
@@ -451,7 +404,6 @@
               <use xlink:href="#instagram"></use>
             </svg>
           </a>
-
         </li>
         <li class="ms-3">
           <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24">
@@ -462,7 +414,9 @@
       </ul>
     </footer>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
   <script>
     function scrollProduct(dir) {
       const el = document.getElementById("product-scroll");
@@ -478,10 +432,8 @@
       }, 700); // duration matches animation
     });
   </script>
-  <!-- Flash overlay for page transition -->
   <div id="flash-overlay"></div>
-  </script>
   
-</body>
+  </body>
 
 </html>
