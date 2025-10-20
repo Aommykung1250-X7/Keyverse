@@ -71,30 +71,44 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary rounded mb-4" aria-label="Thirteenth navbar example">
-     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+        aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a>
-        <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-          <li class="nav-item"><a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a></li>
-           <li class="nav-item"><a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.php">Keyboards</a></li>
-           <li class="nav-item"><a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.php">Switches</a></li>
-           <li class="nav-item"><a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a></li>
-           <li class="nav-item"><a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a></li>
-           <li class="nav-item"><a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a></li>
+        <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a> <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="store.php">Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.php">Keyboards</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="switches.php">Switches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
+          </li>
         </ul>
         <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
-          <a href="search.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Search"><svg></svg></a>
+          <a href="search.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" /></svg>
+          </a>
           
           <?php
-            // คำนวณจำนวนสินค้าในตะกร้า (โค้ดนี้จะเหมือนกันทุกหน้า)
             $cart_count = 0;
             if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $item) { $cart_count += $item['quantity']; }
             }
           ?>
-          <a href="cart.php" id="cart-icon-nav" class="btn btn-link p-2 position-relative active" style="box-shadow: none" aria-label="Cart">
+          <a href="cart.php" id="cart-icon-nav" class="btn btn-link p-2 position-relative" style="box-shadow: none" aria-label="Cart">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V7.125A4.125 4.125 0 008.25 7.125V10.5M3.375 9.75l1.125 9A2.25 2.25 0 006.75 21h10.5a2.25 2.25 0 002.25-2.25l1.125-9a.75.75 0 00-.75-.75H4.125a.75.75 0 00-.75.75z" /></svg>
             <?php if ($cart_count > 0): ?>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -102,13 +116,27 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
               </span>
             <?php endif; ?>
           </a>
+
           <?php if (isset($_SESSION['user_id'])): ?>
             <div class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user me-1"></i> <?php echo htmlspecialchars($_SESSION['username']); ?></a>
-               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"><?php if ($_SESSION['role'] === 'admin'): ?><li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li><li><hr class="dropdown-divider"></li><?php endif; ?><li><a class="dropdown-item" href="profile.php">My Account</a></li><li><a class="dropdown-item" href="orders.php">My Orders</a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li></ul>
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user me-1"></i> <?php echo htmlspecialchars($_SESSION['username']); ?>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                  <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                <?php endif; ?>
+                <li><a class="dropdown-item" href="profile.php">My Account</a></li>
+                <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+              </ul>
             </div>
           <?php else: ?>
-            <a href="login.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Login/Register"><svg></svg></a>
+            <a href="login.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Login/Register">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A1.875 1.875 0 0118.375 22.5H5.625a1.875 1.875 0 01-1.124-2.382z" /></svg>
+            </a>
           <?php endif; ?>
         </div>
       </div>
