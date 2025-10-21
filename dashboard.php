@@ -173,6 +173,7 @@ if ($sub_cat_result) { while ($sub_cat_row = $sub_cat_result->fetch_assoc()) { $
                     }
 
                     // ปุ่ม Actions
+                    
                     echo "<td>
                             <div class='btn-group'>
                               <a href='view_order.php?id=" . $row['order_id'] . "' class='btn btn-sm btn-info'><i class='fa-solid fa-search'></i> ดูรายละเอียด</a>";
@@ -184,6 +185,10 @@ if ($sub_cat_result) { while ($sub_cat_row = $sub_cat_result->fetch_assoc()) { $
                       echo "<a href='update_order_status.php?id=" . $row['order_id'] . "&status=Shipped' class='btn btn-sm btn-primary' onclick='return confirm(\"ยืนยันส่งของออเดอร์นี้?\")'><i class='fa-solid fa-truck'></i> ส่งของ</a>";
                     }
 
+                    // *** เพิ่มปุ่มลบรายการ ***
+                    echo "<a href='delete_order.php?id=" . $row['order_id'] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"คุณแน่ใจหรือไม่ว่าต้องการลบออเดอร์ ID: " . $row['order_id'] . " นี้?\")'><i class='fa-solid fa-trash'></i> ลบ</a>";
+                    // *** จบการเพิ่มปุ่มลบรายการ ***
+                    
                     echo "  </div>
                           </td>";
                     echo "</tr>";
@@ -236,7 +241,9 @@ if ($sub_cat_result) { while ($sub_cat_row = $sub_cat_result->fetch_assoc()) { $
                     }
                     echo "<td>
                             <a href='view_order.php?id=" . $row['order_id'] . "' class='btn btn-sm btn-info'><i class='fa-solid fa-search'></i> ดูรายละเอียด</a>
-                          </td>";
+                            
+                            <a href='delete_order.php?id=" . $row['order_id'] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"คุณแน่ใจหรือไม่ว่าต้องการลบออเดอร์ ID: " . $row['order_id'] . " นี้?\")'><i class='fa-solid fa-trash'></i> ลบ</a>
+                            </td>";
                     echo "</tr>";
                   }
                 } else {

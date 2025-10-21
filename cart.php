@@ -2,13 +2,48 @@
 session_start(); 
 include 'connectdb.php'; // อาจจะไม่ต้องใช้ถ้าไม่ดึงข้อมูลอื่นเพิ่ม
 
-// คำนวณยอดรวม
-$total_price = 0;
+// คำนวณยอดรวม (Subtotal)
+$subtotal = 0; // เปลี่ยนชื่อตัวแปรเพื่อให้สื่อสารชัดเจนขึ้น
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $item) {
-        $total_price += $item['price'] * $item['quantity'];
+        $subtotal += $item['price'] * $item['quantity'];
     }
 }
+// กำหนดตัวแปรสำหรับสถานะ Member (สมมติว่า $_SESSION['role'] ถูกตั้งค่าเมื่อเข้าสู่ระบบ)
+// ถ้าเป็น Member จะมี role เป็น 'member' หรือ 'admin' หรือมี flag อื่นๆ ในที่นี้จะสมมติว่า 'member' คือ Member
+$is_member = (isset($_SESSION['role']) && $_SESSION['role'] === 'member'); 
+// *** ถ้าใช้ role 'admin' ในโค้ดเดิม และไม่ได้เก็บ 'member' ต้องปรับ logic ในหน้า login/register เพื่อให้เหมาะสม
+
+$discount_amount = 0.00;
+$shipping_cost = 0.00;
+$grand_total = $subtotal; // กำหนดเริ่มต้น
+
+// 1. คำนวณส่วนลดและค่าจัดส่ง
+if ($is_member) {
+    // Member: ลด 10% ทุกออเดอร์, ซื้อครบ 1000 ส่งฟรี
+    $discount_amount = $subtotal * 0.10;
+    
+    if ($subtotal < 1000) {
+        $shipping_cost = 100.00; // สมมติค่าส่งมาตรฐาน 100 บาท หากไม่เข้าเงื่อนไขส่งฟรี
+    } else {
+        $shipping_cost = 0.00; // ส่งฟรี
+    }
+} else {
+    // None member: ซื้อครบ 5000 ลด 5%, ค่าส่ง 100
+    if ($subtotal >= 5000) {
+        $discount_amount = $subtotal * 0.05;
+    }
+    $shipping_cost = 100.00; // ค่าส่ง 100 บาท
+}
+
+// 2. คำนวณยอดรวมสุทธิ
+$grand_total = $subtotal - $discount_amount + $shipping_cost;
+if ($grand_total < 0) {
+    $grand_total = 0.00; // ป้องกันยอดรวมติดลบ (ในทางปฏิบัติควรมีขั้นต่ำ)
+}
+
+// ใช้ตัวแปร $total_price = $subtotal; เพื่อไม่ให้กระทบโค้ดเดิมที่ใช้คำนวณยอดรวมสินค้าใน cart list
+$total_price = $subtotal; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,7 +202,35 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
           <?php endforeach; ?>
         </div>
         <div class="col-lg-4">
-          <div class="summary-card p-4"> <h4>Order Summary</h4><hr> <div class="d-flex justify-content-between mb-3"> <span>Subtotal</span> <span>฿<?php echo number_format($total_price, 2); ?></span> </div> <hr> <div class="d-flex justify-content-between fw-bold fs-5"> <span>Total</span> <span>฿<?php echo number_format($total_price, 2); ?></span> </div> <div class="d-grid gap-2 mt-4"> <a href="checkout.php" class="btn btn-primary btn-lg">Proceed to Checkout</a> <a href="store.php" class="btn btn-outline-secondary">Continue Shopping</a> </div> </div>
+          <div class="summary-card p-4"> 
+            <h4>Order Summary</h4><hr> 
+            <div class="d-flex justify-content-between mb-2"> 
+              <span>Subtotal</span> 
+              <span>฿<?php echo number_format($subtotal, 2); ?></span> 
+            </div> 
+            
+            <div class="d-flex justify-content-between mb-2 text-danger"> 
+              <span>Discount (<?php echo $is_member ? 'Member' : 'None Member'; ?>)</span> 
+              <span>- ฿<?php echo number_format($discount_amount, 2); ?></span> 
+            </div>
+            
+            <div class="d-flex justify-content-between mb-3 text-secondary"> 
+              <span>Shipping Fee</span> 
+              <span>+ ฿<?php echo number_format($shipping_cost, 2); ?></span> 
+            </div> 
+            
+            <hr> 
+            
+            <div class="d-flex justify-content-between fw-bold fs-5"> 
+              <span>Total (THB)</span> 
+              <span>฿<?php echo number_format($grand_total, 2); ?></span> 
+            </div> 
+            
+            <div class="d-grid gap-2 mt-4"> 
+              <a href="checkout.php" class="btn btn-primary btn-lg">Proceed to Checkout</a> 
+              <a href="store.php" class="btn btn-outline-secondary">Continue Shopping</a> 
+            </div> 
+          </div>
         </div>
       </div>
     <?php else: ?>

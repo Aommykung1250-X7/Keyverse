@@ -37,6 +37,16 @@ $province = $_POST['province'] ?? '';
 $zip_code = $_POST['zip_code'] ?? '';
 $payment_method = $_POST['paymentMethod'] ?? 'cod'; // Default to COD
 
+// --- START: เพิ่มรับค่าราคาที่คำนวณแล้วจาก checkout.php ---
+// ค่าเหล่านี้ส่งมาจาก hidden fields ใน checkout.php และเป็นค่าสุดท้ายที่ลูกค้าเห็น
+// ควรใช้ filter_var เพื่อแปลงเป็น float และตรวจสอบความปลอดภัย
+$subtotal = filter_var($_POST['subtotal'] ?? 0.00, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+$discount_amount = filter_var($_POST['discount_amount'] ?? 0.00, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+$shipping_cost = filter_var($_POST['shipping_cost'] ?? 0.00, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+$grand_total = filter_var($_POST['grand_total'] ?? 0.00, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+// --- END: เพิ่มรับค่าราคา ---
+
+
 // (เพิ่ม Validation ข้อมูลที่รับมา เช่น ตรวจสอบว่ากรอกครบหรือไม่)
 if (empty($first_name) || empty($last_name) || empty($phone) || empty($address1) || empty($city) || empty($province) || empty($zip_code)) {
      $_SESSION['message'] = "Please fill in all required shipping address fields.";
@@ -45,6 +55,9 @@ if (empty($first_name) || empty($last_name) || empty($phone) || empty($address1)
      exit();
 }
 
+// --- ตรวจสอบความถูกต้องของ Grand Total อีกครั้ง (Optional แต่แนะนำ) ---
+// ใช้ค่า Grand Total ที่ส่งมา
+$final_total_amount = $grand_total; 
 
 // --- เตรียมข้อมูลสำหรับบันทึก ---
 // รวมที่อยู่
@@ -56,15 +69,6 @@ if (!empty($address2)) {
 }
 $shipping_address .= $city . ", " . $province . " " . $zip_code;
 
-// คำนวณยอดรวม (คำนวณใหม่จาก Session เพื่อความปลอดภัย)
-$total_amount = 0;
-foreach ($_SESSION['cart'] as $item) {
-    // อาจจะดึงราคาล่าสุดจาก DB อีกครั้งตรงนี้เผื่อมีการเปลี่ยนแปลง
-    $total_amount += $item['price'] * $item['quantity'];
-}
-// (อาจจะบวกค่าส่ง หรืออื่นๆ ตรงนี้)
-// $total_amount += $shipping_cost; 
-
 $order_status = 'Pending'; // สถานะเริ่มต้น
 
 
@@ -73,9 +77,12 @@ $conn->begin_transaction();
 
 try {
     // 1. INSERT ข้อมูลลงตาราง `orders`
-    $sql_order = "INSERT INTO orders (user_id, total_amount, status, shipping_address) VALUES (?, ?, ?, ?)";
+    $sql_order = "INSERT INTO orders (user_id, subtotal, discount_amount, shipping_cost, total_amount, status, shipping_address) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
     $stmt_order = $conn->prepare($sql_order);
-    $stmt_order->bind_param("idss", $user_id, $total_amount, $order_status, $shipping_address);
+    
+    // *** แก้ไขตรงนี้: เพิ่ม 'd' สำหรับ $final_total_amount เพื่อให้รวมเป็น 7 ตัวอักษร: i d d d d s s ***
+    $stmt_order->bind_param("iddddss", $user_id, $subtotal, $discount_amount, $shipping_cost, $final_total_amount, $order_status, $shipping_address);
     
     if (!$stmt_order->execute()) {
         throw new Exception("Error inserting order: " . $stmt_order->error);
@@ -98,7 +105,7 @@ try {
         $product_id = $item['product_id'];
         $quantity = $item['quantity'];
         $price_per_unit = $item['price']; // ใช้ราคาจากตอน Add to Cart
-        $selected_switch = $item['switch'];
+        $selected_switch = $item['switch'] ?? NULL; // ใช้ ?? NULL เพื่อจัดการกรณีที่ไม่มี switch
 
         // 2.1 INSERT ลง order_items
         $stmt_items->bind_param("iiids", $order_id, $product_id, $quantity, $price_per_unit, $selected_switch);
@@ -137,6 +144,7 @@ try {
     $conn->rollback();
 
     // 7. เก็บ Error Message แล้วส่งกลับไปหน้า Checkout
+    // ใช้ getMessage() เพื่อแสดงข้อความที่กำหนดเอง (เช่น Insufficient stock)
     $_SESSION['message'] = "Failed to place order: " . $e->getMessage();
     $_SESSION['message_type'] = "danger";
     

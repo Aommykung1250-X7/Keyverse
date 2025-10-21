@@ -6,11 +6,42 @@ include 'connectdb.php';
 if (!isset($_SESSION['user_id'])) { /* ... redirect to login ... */ exit(); }
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) { /* ... redirect to cart ... */ exit(); }
 
-// --- คำนวณยอดรวม ---
+// --- คำนวณยอดรวม (Subtotal) ---
 $subtotal = 0;
 foreach ($_SESSION['cart'] as $item) { $subtotal += $item['price'] * $item['quantity']; }
-$shipping_cost = 0.00; // ค่าส่งเป็น 0 (ตามโค้ดเดิม)
-$grand_total = $subtotal;
+// $shipping_cost และ $grand_total จะถูกคำนวณใหม่
+
+// --- เพิ่ม: กำหนดตัวแปรสำหรับสถานะ Member และคำนวณส่วนลด/ค่าจัดส่ง ---
+$is_member = (isset($_SESSION['role']) && $_SESSION['role'] === 'member'); 
+// *** ปรับ logic นี้ให้ตรงกับความเป็นจริง เช่น อาจต้องดึงข้อมูล user จาก DB หรือใช้ role ที่มีอยู่
+
+$discount_amount = 0.00;
+$shipping_cost = 0.00; // กำหนดเริ่มต้น
+
+// 1. คำนวณส่วนลดและค่าจัดส่ง
+if ($is_member) {
+    // Member: ลด 10% ทุกออเดอร์, ซื้อครบ 1000 ส่งฟรี
+    $discount_amount = $subtotal * 0.10;
+    
+    if ($subtotal < 1000) {
+        $shipping_cost = 100.00; // สมมติค่าส่งมาตรฐาน 100 บาท หากไม่เข้าเงื่อนไขส่งฟรี
+    } else {
+        $shipping_cost = 0.00; // ส่งฟรี
+    }
+} else {
+    // None member: ซื้อครบ 5000 ลด 5%, ค่าส่ง 100
+    if ($subtotal >= 5000) {
+        $discount_amount = $subtotal * 0.05;
+    }
+    $shipping_cost = 100.00; // ค่าส่ง 100 บาท
+}
+
+// 2. คำนวณยอดรวมสุทธิ
+$grand_total = $subtotal - $discount_amount + $shipping_cost;
+if ($grand_total < 0) {
+    $grand_total = 0.00; 
+}
+// --- สิ้นสุด: เพิ่ม ---
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,9 +177,35 @@ $grand_total = $subtotal;
               <?php foreach ($_SESSION['cart'] as $item): ?>
                 <li class="list-group-item d-flex justify-content-between lh-sm summary-item"> <img src="<?php echo (!empty($item['image']) && file_exists($item['image'])) ? htmlspecialchars($item['image']) : 'img/placeholder.png'; ?>" alt=""> <div> <h6 class="my-0"><?php echo htmlspecialchars($item['name']); ?></h6> <small class="text-muted"> Qty: <?php echo $item['quantity']; ?> <?php if(!empty($item['switch'])): ?> (<?php echo htmlspecialchars($item['switch']); ?>) <?php endif; ?> </small> </div> <span class="text-muted">฿<?php echo number_format($item['price'] * $item['quantity'], 2); ?></span> </li>
               <?php endforeach; ?>
-              <li class="list-group-item d-flex justify-content-between bg-light"> <div class="text-secondary"> <h6 class="my-0">Shipping</h6> <small>Standard Delivery</small> </div> <span class="text-secondary">฿<?php echo number_format($shipping_cost, 2); ?></span> </li>
-              <li class="list-group-item d-flex justify-content-between fs-5 fw-bold"> <span>Total (THB)</span> <strong>฿<?php echo number_format($grand_total, 2); ?></strong> </li>
+
+              <li class="list-group-item d-flex justify-content-between bg-light"> 
+                <div class="text-secondary"> <h6 class="my-0">Subtotal</h6> </div> 
+                <span class="text-secondary">฿<?php echo number_format($subtotal, 2); ?></span> 
+              </li>
+
+              <?php if ($discount_amount > 0): ?>
+                <li class="list-group-item d-flex justify-content-between bg-light text-danger"> 
+                  <div class="text-danger"> <h6 class="my-0">Discount</h6> <small><?php echo $is_member ? 'Member 10%' : 'None Member 5% (>= 5000)'; ?></small> </div> 
+                  <span class="text-danger">- ฿<?php echo number_format($discount_amount, 2); ?></span> 
+                </li>
+              <?php endif; ?>
+              
+              <li class="list-group-item d-flex justify-content-between bg-light"> 
+                <div class="text-secondary"> <h6 class="my-0">Shipping</h6> <small>Standard Delivery</small> </div> 
+                <span class="text-secondary">฿<?php echo number_format($shipping_cost, 2); ?></span> 
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between fs-5 fw-bold"> 
+                <span>Total (THB)</span> 
+                <strong>฿<?php echo number_format($grand_total, 2); ?></strong> 
+              </li>
             </ul>
+            
+            <input type="hidden" name="subtotal" value="<?php echo $subtotal; ?>">
+            <input type="hidden" name="discount_amount" value="<?php echo $discount_amount; ?>">
+            <input type="hidden" name="shipping_cost" value="<?php echo $shipping_cost; ?>">
+            <input type="hidden" name="grand_total" value="<?php echo $grand_total; ?>">
+            
           </div>
         </div>
       </div>

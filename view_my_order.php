@@ -21,8 +21,8 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 $order_id = $_GET['id'];
 
-// 3. ดึงข้อมูลออเดอร์หลัก (เหมือนเดิม แต่จะเช็ค user_id ทีหลัง)
-$stmt = $conn->prepare("SELECT o.*, u.username 
+// 3. ดึงข้อมูลออเดอร์หลัก (เพิ่มการเลือก subtotal, discount_amount, shipping_cost)
+$stmt = $conn->prepare("SELECT o.*, o.subtotal, o.discount_amount, o.shipping_cost, u.username 
                         FROM orders o 
                         LEFT JOIN users u ON o.user_id = u.user_id
                         WHERE o.order_id = ?");
@@ -230,6 +230,30 @@ if ($order['user_id'] != $user_id) {
           </table>
         </div>
         
+        <div class="row justify-content-end mt-4">
+            <div class="col-md-6 col-lg-5">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Subtotal</span>
+                        <strong>฿<?php echo number_format($order['subtotal'], 2); ?></strong>
+                    </li>
+                    <?php if ($order['discount_amount'] > 0): ?>
+                    <li class="list-group-item d-flex justify-content-between text-danger">
+                        <span>Discount</span>
+                        <strong>- ฿<?php echo number_format($order['discount_amount'], 2); ?></strong>
+                    </li>
+                    <?php endif; ?>
+                    <li class="list-group-item d-flex justify-content-between text-secondary">
+                        <span>Shipping Fee</span>
+                        <strong>+ ฿<?php echo number_format($order['shipping_cost'], 2); ?></strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between fs-5 fw-bold bg-light">
+                        <span>Grand Total (THB)</span>
+                        <strong>฿<?php echo number_format($order['total_amount'], 2); ?></strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
         </div> </div> </div> <?php $conn->close(); ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

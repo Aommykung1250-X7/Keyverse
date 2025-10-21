@@ -15,10 +15,10 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: dashboard.php");
     exit();
 }
-$order_id = $_GET['id']; // <-- ตัวแปร $order_id ถูกต้องแล้ว
+$order_id = $_GET['id'];
 
-// 3. ดึงข้อมูลออเดอร์หลัก (จากตาราง orders)
-$stmt = $conn->prepare("SELECT o.*, u.username 
+// 3. ดึงข้อมูลออเดอร์หลัก (จากตาราง orders) - เพิ่มคอลัมน์ราคาใหม่
+$stmt = $conn->prepare("SELECT o.*, o.subtotal, o.discount_amount, o.shipping_cost, u.username 
                         FROM orders o 
                         LEFT JOIN users u ON o.user_id = u.user_id
                         WHERE o.order_id = ?");
@@ -36,6 +36,15 @@ if ($order_result->num_rows === 0) {
 }
 $order = $order_result->fetch_assoc();
 $stmt->close();
+
+// 4. ดึงรายการสินค้าในออเดอร์
+$items_stmt = $conn->prepare("SELECT oi.*, p.name, p.image_url 
+                              FROM order_items oi 
+                              LEFT JOIN products p ON oi.product_id = p.product_id 
+                              WHERE oi.order_id = ?");
+$items_stmt->bind_param("i", $order_id);
+$items_stmt->execute();
+$items_result = $items_stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +55,10 @@ $stmt->close();
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <style> body { background-color: #f8f9fa; } </style>
+  <style> 
+    body { background-color: #f8f9fa; } 
+    .status-badge { padding: .5em .75em; font-size: 0.9em; font-weight: 600; border-radius: .3rem; }
+  </style>
 </head>
 <body>
 
@@ -79,7 +91,28 @@ $stmt->close();
           </div>
           <div class="col-md-4">
             <h5>สถานะปัจจุบัน</h5>
-            <span class="badge fs-6 bg-primary"><?php echo htmlspecialchars($order['status']); ?></span>
+            <?php
+            // กำหนด class badge ตามสถานะ
+            $status_class = 'bg-secondary';
+            switch ($order['status']) {
+                case 'Pending':
+                    $status_class = 'bg-warning text-dark';
+                    break;
+                case 'Processing':
+                    $status_class = 'bg-info';
+                    break;
+                case 'Shipped':
+                    $status_class = 'bg-primary';
+                    break;
+                case 'Completed':
+                    $status_class = 'bg-success';
+                    break;
+                case 'Cancelled':
+                    $status_class = 'bg-danger';
+                    break;
+            }
+            ?>
+            <span class="badge fs-6 <?php echo $status_class; ?>"><?php echo htmlspecialchars($order['status']); ?></span>
           </div>
           <div class="col-12">
             <h5>ที่อยู่จัดส่ง</h5>
@@ -104,14 +137,6 @@ $stmt->close();
             </thead>
             <tbody>
               <?php
-                $items_stmt = $conn->prepare("SELECT oi.*, p.name, p.image_url 
-                                            FROM order_items oi
-                                            JOIN products p ON oi.product_id = p.product_id
-                                            WHERE oi.order_id = ?");
-                $items_stmt->bind_param("i", $order_id);
-                $items_stmt->execute();
-                $items_result = $items_stmt->get_result();
-
                 if ($items_result->num_rows > 0) {
                   while ($item = $items_result->fetch_assoc()) {
               ?>
@@ -137,7 +162,6 @@ $stmt->close();
                 } else {
                   echo "<tr><td colspan='6' class='text-center'>ไม่พบรายการสินค้าในออเดอร์นี้</td></tr>";
                 }
-                $items_stmt->close();
               ?>
             </tbody>
           </table>
@@ -145,7 +169,32 @@ $stmt->close();
         
         <hr>
         
-        <div class="text-end">
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-6">
+                <div class="card p-3 bg-light">
+                    <h5 class="card-title">สรุปยอดรวม</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                            ยอดรวมสินค้า (Subtotal):
+                            <span>฿<?php echo number_format($order['subtotal'] ?? 0, 2); ?></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                            ส่วนลด (Discount):
+                            <span class="text-danger">- ฿<?php echo number_format($order['discount_amount'] ?? 0, 2); ?></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                            ค่าจัดส่ง (Shipping Cost):
+                            <span>฿<?php echo number_format($order['shipping_cost'] ?? 0, 2); ?></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light fw-bold fs-5">
+                            รวมทั้งหมดสุทธิ (Grand Total):
+                            <span>฿<?php echo number_format($order['total_amount'] ?? 0, 2); ?></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
           <h5 class="d-inline me-3">อัปเดตสถานะ:</h5>
           
           <a href="update_order_status.php?id=<?php echo $order_id; ?>&status=Processing" class="btn btn-info" 
@@ -167,6 +216,12 @@ $stmt->close();
              onclick='return confirm("!! แน่ใจหรือไม่ว่าจะ \"ยกเลิก\" ออเดอร์นี้ !!")'>
              <i class="fa-solid fa-times-circle"></i> ยกเลิก (Cancelled)
           </a>
+          
+          <a href="delete_order.php?id=<?php echo $order_id; ?>" class="btn btn-outline-danger mt-2" 
+             onclick='return confirm("*** การลบออเดอร์นี้จะลบรายการสินค้าทั้งหมดที่เกี่ยวข้องด้วย คุณแน่ใจหรือไม่? ***")'>
+             <i class="fa-solid fa-trash-alt"></i> ลบออเดอร์ถาวร
+          </a>
+          
         </div>
 
       </div>
