@@ -1,16 +1,55 @@
-<?php 
-session_start(); 
-include 'connectdb.php'; 
+<?php
+session_start();
+include 'connectdb.php'; // ใช้ connectdb.php
 
 // --- การป้องกัน ---
 // 1. ตรวจสอบว่าล็อกอินหรือยัง
 if (!isset($_SESSION['user_id'])) {
-    $_SESSION['message'] = "Please log in to view your orders.";
+    $_SESSION['message'] = "Please log in to view your order details.";
     $_SESSION['message_type'] = "warning";
-    header("Location: login.php"); 
+    header("Location: login.php");
     exit();
 }
-$user_id = $_SESSION['user_id']; // เก็บ User ID ไว้ใช้ query
+$user_id = $_SESSION['user_id']; // เก็บ User ID ไว้ใช้ตรวจสอบ
+
+// 2. ตรวจสอบว่ามี ID ของออเดอร์ส่งมาหรือไม่
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    $_SESSION['message'] = "Order ID not specified.";
+    $_SESSION['message_type'] = "danger";
+    header("Location: orders.php"); // กลับไปหน้า My Orders
+    exit();
+}
+$order_id = $_GET['id'];
+
+// 3. ดึงข้อมูลออเดอร์หลัก (เหมือนเดิม แต่จะเช็ค user_id ทีหลัง)
+$stmt = $conn->prepare("SELECT o.*, u.username 
+                        FROM orders o 
+                        LEFT JOIN users u ON o.user_id = u.user_id
+                        WHERE o.order_id = ?");
+$stmt->bind_param("i", $order_id);
+$stmt->execute();
+$order_result = $stmt->get_result();
+
+if ($order_result->num_rows === 0) {
+    $_SESSION['message'] = "Order not found (ID: " . $order_id . ")";
+    $_SESSION['message_type'] = "danger";
+    $stmt->close();
+    $conn->close();
+    header("Location: orders.php"); // กลับไปหน้า My Orders
+    exit();
+}
+$order = $order_result->fetch_assoc();
+$stmt->close();
+
+// *** 4. ตรวจสอบความเป็นเจ้าของออเดอร์ ***
+if ($order['user_id'] != $user_id) {
+    $_SESSION['message'] = "You do not have permission to view this order.";
+    $_SESSION['message_type'] = "danger";
+    $conn->close();
+    header("Location: orders.php"); // กลับไปหน้า My Orders
+    exit();
+}
+// *** จบการตรวจสอบ ***
 
 ?>
 <!DOCTYPE html>
@@ -18,13 +57,11 @@ $user_id = $_SESSION['user_id']; // เก็บ User ID ไว้ใช้ quer
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Orders - KEYVERSE</title>
+  <title>Order Details #<?php echo $order['order_id']; ?> - KEYVERSE</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
-  <style>
-    /* (CSS Navbar ... เหมือนเดิม) */
+  <style> 
     .navbar .container-fluid { max-width: 1600px; width: 100%; margin-left: auto; margin-right: auto; }
     .navbar { min-height: 80px; font-size: 1.25rem; }
     .nav-item { font-size: medium; padding-left: 16px; padding-right: 16px; }
@@ -36,17 +73,8 @@ $user_id = $_SESSION['user_id']; // เก็บ User ID ไว้ใช้ quer
     body { color: #4d4c51; background-color: #f8f9fa; } /* เปลี่ยนสีพื้นหลังเล็กน้อย */
     .navbar .dropdown-toggle { color: #4d4c51; font-weight: 400; font-size: 1.1rem; }
     .navbar .dropdown-menu { font-size: 1rem; }
-    .table th {
-        background-color: #f8f9fa; /* สีพื้นหลังหัวตาราง */
-    }
-    .status-badge {
-        font-size: 0.9em;
-        padding: 0.4em 0.7em;
-    }
   </style>
-  
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
     <div class="container-fluid">
@@ -100,6 +128,7 @@ $user_id = $_SESSION['user_id']; // เก็บ User ID ไว้ใช้ quer
                   <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
                   <li><hr class="dropdown-divider"></li>
                 <?php endif; ?>
+              
                 <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
@@ -115,91 +144,93 @@ $user_id = $_SESSION['user_id']; // เก็บ User ID ไว้ใช้ quer
     </div>
   </nav>
 
-  <div class="container my-5">
-    <h2>My Orders</h2>
-    <hr class="mb-4">
-
-    <?php
-     if (isset($_SESSION['message'])) {
-       $message_type_class = 'alert-danger'; 
-       // ... (โค้ดแสดง Alert เหมือนหน้าอื่นๆ) ...
-       echo '<div class="alert ' . $message_type_class . ' alert-dismissible fade show" role="alert">'.htmlspecialchars($_SESSION['message']).'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-       unset($_SESSION['message']); unset($_SESSION['message_type']);
-     }
-    ?>
-
-    <div class="card shadow-sm">
+  <div class="container" style="max-width: 1200px; margin-top: 30px;">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3>Order Details </h3>
+        <a href="orders.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to My Orders</a>
+      </div>
+      
       <div class="card-body">
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <h5>Customer Info</h5>
+            <strong>User ID:</strong> <?php echo $order['user_id']; ?><br>
+            <strong>Username:</strong> <?php echo htmlspecialchars($order['username']); ?>
+          </div>
+          <div class="col-md-4">
+            <h5>Order Info</h5>
+            <strong>Order Date:</strong> <?php echo date("d M Y, H:i", strtotime($order['order_date'])); ?><br>
+            <strong>Total Amount:</strong> <?php echo number_format($order['total_amount'], 2); ?> THB
+          </div>
+          <div class="col-md-4">
+            <h5>Current Status</h5>
+            <?php 
+              $status_class = 'bg-secondary'; // Default
+              if ($order['status'] == 'Completed' || $order['status'] == 'Shipped') { $status_class = 'bg-success'; } 
+              elseif ($order['status'] == 'Processing') { $status_class = 'bg-info text-dark'; } 
+              elseif ($order['status'] == 'Pending') { $status_class = 'bg-warning text-dark'; } 
+              elseif ($order['status'] == 'Cancelled') { $status_class = 'bg-danger'; }
+            ?>
+            <span class="badge fs-6 <?php echo $status_class; ?>">
+                <?php echo htmlspecialchars($order['status']); ?>
+            </span>
+          </div>
+          <div class="col-12">
+            <h5>Shipping Address</h5>
+            <pre><?php echo htmlspecialchars($order['shipping_address']); ?></pre>
+          </div>
+        </div>
+
+        <hr>
+
+        <h4 class="mb-3">Items in this Order</h4>
         <div class="table-responsive">
-          <table class="table table-hover align-middle">
+          <table class="table align-middle">
             <thead class="table-light">
               <tr>
-                <th scope="col">Order Date</th>
-                <th scope="col">Total Amount</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
+                <th>Image</th>
+                <th>Product (ID)</th>
+                <th>Switch (if any)</th>
+                <th>Price/Unit</th>
+                <th>Qty</th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
               <?php
-                // --- ดึงข้อมูลออเดอร์ของ User คนนี้ ---
-                $stmt = $conn->prepare("SELECT order_id, DATE_FORMAT(order_date, '%d %b %Y, %H:%i') as formatted_date, total_amount, status 
-                                         FROM orders 
-                                         WHERE user_id = ? 
-                                         ORDER BY order_date DESC"); // เรียงจากล่าสุด
-                $stmt->bind_param("i", $user_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
+                // ดึงข้อมูล "ของ" ในออเดอร์
+                $items_stmt = $conn->prepare("SELECT oi.*, p.name, p.image_url 
+                                            FROM order_items oi
+                                            JOIN products p ON oi.product_id = p.product_id
+                                            WHERE oi.order_id = ?");
+                $items_stmt->bind_param("i", $order_id);
+                $items_stmt->execute();
+                $items_result = $items_stmt->get_result();
 
-                if ($result->num_rows > 0) {
-                  while ($order = $result->fetch_assoc()) {
+                if ($items_result->num_rows > 0) {
+                  while ($item = $items_result->fetch_assoc()) {
               ?>
-                    <tr>
-                      <td><?php echo $order['formatted_date']; ?></td>
-                      <td>฿<?php echo number_format($order['total_amount'], 2); ?></td>
-                      <td>
-                          <?php 
-                          // แสดง Badge ตามสถานะ
-                          $status_class = 'bg-secondary'; // Default
-                          if ($order['status'] == 'Completed' || $order['status'] == 'Shipped') {
-                              $status_class = 'bg-success';
-                          } elseif ($order['status'] == 'Processing') {
-                              $status_class = 'bg-info text-dark';
-                          } elseif ($order['status'] == 'Pending') {
-                              $status_class = 'bg-warning text-dark';
-                          } elseif ($order['status'] == 'Cancelled') {
-                              $status_class = 'bg-danger';
-                          }
-                          ?>
-                          <span class="badge status-badge <?php echo $status_class; ?>">
-                              <?php echo htmlspecialchars($order['status']); ?>
-                          </span>
-                      </td>
-                      <td>
-                          <a href="view_my_order.php?id=<?php echo $order['order_id']; ?>" class="btn btn-sm btn-outline-primary">
-                              <i class="fas fa-eye me-1"></i> View Details
-                          </a>
-                          </td>
-                    </tr>
+                <tr>
+                  <td><img src="<?php echo htmlspecialchars($item['image_url'] ?? 'img/placeholder.png'); ?>" width="60" height="60" style="object-fit: cover; border-radius: 5px;" alt="<?php echo htmlspecialchars($item['name']); ?>"></td>
+                  <td><strong><?php echo htmlspecialchars($item['name']); ?></strong><br><small class="text-muted">PID: <?php echo $item['product_id']; ?></small></td>
+                  <td><?php echo htmlspecialchars($item['selected_switch'] ?? 'N/A'); ?></td>
+                  <td><?php echo number_format($item['price_per_unit'], 2); ?></td>
+                  <td><?php echo $item['quantity']; ?></td>
+                  <td><?php echo number_format($item['price_per_unit'] * $item['quantity'], 2); ?></td>
+                </tr>
               <?php
-                  } // end while
+                  }
                 } else {
-                  // ถ้าไม่มีออเดอร์
-                  echo '<tr><td colspan="5" class="text-center text-muted py-4">You have not placed any orders yet.</td></tr>';
+                  echo "<tr><td colspan='6' class='text-center'>No items found for this order.</td></tr>";
                 }
-                $stmt->close();
-                $conn->close();
+                $items_stmt->close();
               ?>
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
-  </div> 
-
-  <div class="container"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> </footer></div>
-  
+        
+        </div> </div> </div> <?php $conn->close(); ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
 </body>
 </html>

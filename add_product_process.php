@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'connectdb.php'; 
+include 'connectdb.php';
 
 // (ฟังก์ชัน uploadProductImage ... เหมือนเดิม)
 function uploadProductImage($file) {
-    $upload_dir = 'uploads/'; 
+    $upload_dir = 'uploads/';
     if (isset($file) && $file['error'] == UPLOAD_ERR_OK) {
         $check = getimagesize($file["tmp_name"]);
         if($check === false) { $_SESSION['message'] = "ไฟล์ที่อัปโหลดไม่ใช่รูปภาพ"; $_SESSION['message_type'] = "danger"; return null; }
@@ -13,12 +13,12 @@ function uploadProductImage($file) {
         $new_filename = time() . '_' . $safe_filename . '.' . $file_extension;
         $target_file = $upload_dir . $new_filename;
         if (move_uploaded_file($file['tmp_name'], $target_file)) {
-            return $target_file; 
+            return $target_file;
         } else {
             $_SESSION['message'] = "เกิดข้อผิดพลาดขณะอัปโหลดไฟล์"; $_SESSION['message_type'] = "danger"; return null;
         }
     }
-    return null; 
+    return null;
 }
 
 
@@ -26,35 +26,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $image_url_to_db = uploadProductImage($_FILES['product_image']);
     if ($image_url_to_db === null && isset($_SESSION['message'])) {
-        header("Location: add_product.php"); 
+        header("Location: add_product.php");
         exit();
     }
-    
-    // --- รับค่าจากฟอร์ม (เวอร์ชันใหม่) ---
+
+    // --- รับค่าจากฟอร์ม (เวอร์ชันล่าสุด) ---
     $name = $_POST['name'] ?? '';
     $description = $_POST['description'] ?? NULL;
     $price = $_POST['price'] ?? 0.00;
     $stock_quantity = $_POST['stock_quantity'] ?? 0;
     $category = $_POST['category'] ?? '';
-    $keyboard_size = $_POST['keyboard_size'] ?? NULL; // <-- 1. เพิ่มตัวแปร
+    $keyboard_size = $_POST['keyboard_size'] ?? NULL;
+    $sub_category = $_POST['sub_category'] ?? NULL; // <-- 1. เพิ่มรับ sub_category
     $available_switches = $_POST['available_switches'] ?? NULL;
 
     // แปลงค่าว่างให้เป็น NULL
     $description = empty($description) ? NULL : $description;
-    $keyboard_size = empty($keyboard_size) ? NULL : $keyboard_size; // <-- 2. แปลงค่าว่าง
+    $keyboard_size = empty($keyboard_size) ? NULL : $keyboard_size;
+    $sub_category = empty($sub_category) ? NULL : $sub_category; // <-- 2. แปลงค่าว่าง sub_category
     $available_switches = empty($available_switches) ? NULL : $available_switches;
     $image_url_to_db = empty($image_url_to_db) ? NULL : $image_url_to_db;
 
-    // --- 3. บันทึกลง DB (เวอร์ชันใหม่) ---
-    $sql = "INSERT INTO products (name, description, price, stock_quantity, category, keyboard_size, available_switches, image_url) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // <-- 3. เพิ่ม field และ ?
-    
+    // --- 3. บันทึกลง DB (เวอร์ชันล่าสุด) ---
+    // เพิ่ม sub_category เข้าไปใน INSERT statement
+    $sql = "INSERT INTO products (name, description, price, stock_quantity, category, keyboard_size, sub_category, available_switches, image_url)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // <-- 3. เพิ่ม field และ ? (รวมเป็น 9 fields)
+
     $stmt = $conn->prepare($sql);
-    
-    // "ssdiss" + "s" + "s" + "s" = ssdissss (8 ตัว)
-    $stmt->bind_param("ssdissss", // <-- 4. แก้ไข bind_param
-        $name, $description, $price, $stock_quantity, $category, 
-        $keyboard_size, $available_switches, $image_url_to_db
+
+    // "ssdiss" + "s" + "s" + "s" + "s" = ssdisssss (9 ตัว)
+    $stmt->bind_param("ssdisssss", // <-- 4. แก้ไข bind_param type string (9 characters)
+        $name, $description, $price, $stock_quantity, $category,
+        $keyboard_size, $sub_category, $available_switches, $image_url_to_db // <-- 5. เพิ่ม $sub_category
     );
 
     if ($stmt->execute()) {
@@ -64,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['message'] = "เกิดข้อผิดพลาดในการเพิ่มสินค้า: " . $stmt->error;
         $_SESSION['message_type'] = "danger";
     }
-    
+
     $stmt->close();
     $conn->close();
     header("Location: dashboard.php");

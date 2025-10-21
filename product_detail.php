@@ -50,7 +50,7 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
     @media (max-width: 991.98px) { .nav-item { padding-left: 8px; padding-right: 8px; font-size: 0.95rem; } }
     .navbar .navbar-brand { font-size: 2rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
     .navbar .nav-link { padding-top: 1rem; padding-bottom: 1rem; }
-    .navbar .nav-link.active, .navbar .nav-link:focus { color: #866953 !important; font-weight: 400; } 
+    .navbar .nav-link.active, .navbar .nav-link:focus { color: #000 !important; font-weight: bold; } 
     .btn-link svg { width: 30px !important; height: 30px !important; }
     body { color: #4d4c51; background-color: #f8f9fa; } /* เปลี่ยนสีพื้นหลังเล็กน้อย */
     .navbar .dropdown-toggle { color: #4d4c51; font-weight: 400; font-size: 1.1rem; }
@@ -116,7 +116,7 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
         <a class="navbar-brand col-lg-3 me-0" style="padding-left: 18px; color: #4d4c51" href="index.php">KEYVERSE</a> <ul class="navbar-nav col-lg-6 justify-content-lg-center">
           <li class="nav-item">
-            <a class="nav-link active" href="store.php">Store</a>
+            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="store.php">Store</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keyboard.php">Keyboards</a>
@@ -129,9 +129,6 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
           </li>
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
           </li>
         </ul>
         <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
@@ -163,7 +160,7 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
                   <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
                   <li><hr class="dropdown-divider"></li>
                 <?php endif; ?>
-                <li><a class="dropdown-item" href="profile.php">My Account</a></li>
+                
                 <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
@@ -250,7 +247,7 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
           </button>
         </form>
         </div>
-    </div> </div> <div class="container"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Instagram"> <svg class="bi" width="24" height="24" aria-hidden="true"> <use xlink:href="#instagram"></use> </svg> </a> </li> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"> <use xlink:href="#facebook"></use> </svg> </a> </li> </ul> </footer></div>
+    </div> </div> 
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

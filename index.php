@@ -1,4 +1,6 @@
-<?php session_start(); // **1. เริ่ม Session เพื่อเช็กสถานะล็อกอิน** ?>
+<?php 
+session_start(); 
+include 'connectdb.php'; // **1. เพิ่ม Include connectdb.php** ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,9 +65,7 @@
       height: 30px !important;
     }
 
-    body {
-      color: #4d4c51;
-    }
+    body { color: #4d4c51; background-color: #f8f9fa; }
 
     /* Flash overlay styles */
     #flash-overlay {
@@ -97,6 +97,42 @@
     .navbar .dropdown-menu {
         font-size: 1rem;
     }
+    .featured-section {
+        padding: 50px 0;
+        background-color: #f8f9fa; /* สีพื้นหลังอ่อนๆ */
+    }
+    .product-grid-card {
+        background: #fff; 
+        border-radius: 15px; 
+        box-shadow: 0 2px 8px #0000001a; 
+        overflow: hidden; 
+        display: flex; 
+        flex-direction: column; 
+        text-decoration: none; 
+        color: inherit;
+        border: 1px solid #eee;
+        height: 100%; 
+        transition: box-shadow 0.2s ease;
+    }
+    .product-grid-card:hover { 
+        box-shadow: 0 4px 12px #00000026;
+    } 
+    .product-grid-card img { 
+        width: 100%; 
+        height: 200px; 
+        object-fit: cover; 
+    }
+    .product-grid-card-body { 
+        padding: 15px; 
+        text-align: left; 
+        flex-grow: 1; 
+        display: flex; 
+        flex-direction: column;
+    }
+    .product-grid-card-title { font-size: 1.05rem; font-weight: bold; margin-bottom: 5px; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .product-grid-card-detail { font-size: 0.9rem; color: #666; margin-bottom: 10px; height: 38px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .product-grid-card-price { font-weight: bold; color: #444; font-size: 1rem; margin-top: auto; }
+    .no-products { text-align: center; color: #888; padding: 40px; }
   </style>
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
     <symbol id="instagram" viewBox="0 0 32 32">
@@ -137,9 +173,6 @@
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
-          </li>
         </ul>
         
         <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
@@ -175,7 +208,7 @@
                   <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
                   <li><hr class="dropdown-divider"></li>
                 <?php endif; ?>
-                <li><a class="dropdown-item" href="profile.php">My Account</a></li>
+               
                 <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
@@ -262,171 +295,64 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <div style="
-        background: linear-gradient(to bottom, #e5e7eb 0%, #fff 100%);
-        padding: 40px 0 40px 0;
-      ">
+  <div class="featured-section">
     <div class="container">
-      <h2 class="fw-bold me-auto" style="
-            font-size: 2.7rem;
-            letter-spacing: 2px;
-            color: #444;
-            padding-left: 25px;
-          ">
-        PRODUCT
-      </h2>
-      <div class="d-flex justify-content-center gap-5 flex-wrap">
-        <div class="d-flex flex-column align-items-center" style="width: 600px">
-          <div style="
-                width: 100%;
-                aspect-ratio: 1/1;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-                background: #fff;
-              ">
-            <img src="img/keyboard4.jpg" alt="KEYBOARD NAME" style="width: 100%; height: 100%; object-fit: cover" />
-          </div>
-          <div class="fw-bold mt-3" style="font-size: 1.35rem; color: #4d4c51">
-            KEYBOARD NAME
-          </div>
-          <div class="mb-2" style="color: #888; font-size: 1.1rem">
-            ราคา 0000
-          </div>
-        </div>
-        <div class="d-flex flex-column align-items-center" style="width: 600px">
-          <div style="
-                width: 100%;
-                aspect-ratio: 1/1;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-                background: #fff;
-              ">
-            <img src="img/keycap.png" alt="KEYCAP NAME" style="width: 100%; height: 100%; object-fit: cover" />
-          </div>
-          <div class="fw-bold mt-3" style="font-size: 1.35rem; color: #4d4c51">
-            KEYCAP NAME
-          </div>
-          <div class="mb-2" style="color: #888; font-size: 1.1rem">
-            ราคา 0000
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="w-100 d-flex justify-content-center">
-    <hr class="my-4" style="
-          width: 1300px;
-          border-top: 3px solid #dee2e6;
-          opacity: 1;
-          border-radius: 1px;
-        " />
-  </div>
-  <div style="background: #fff; padding: 32px 0 48px 0">
-    <div class="container">
-      <div class="d-flex align-items-center mb-3">
-        <a href="store.html" class="btn px-5 py-2 fw-bold" style="
-              border-radius: 999px;
-              font-size: 1.1rem;
-              background-color: #4d4c51;
-              color: #fff;
-            ">View more</a>
-      </div>
-      <div class="position-relative">
-        <div id="product-scroll" class="d-flex flex-nowrap overflow-auto pb-3" style="scroll-behavior: smooth">
-          <div class="card me-4 flex-shrink-0" style="
-                width: 240px;
-                border-radius: 24px;
-                overflow: hidden;
-                box-shadow: 0 2px 12px #0001;
-              ">
-            <img src="img/keyboard1.jpg" class="w-100" style="aspect-ratio: 1.1/1; object-fit: cover" />
-            <div class="card-body text-center p-3" style="color: #4d4c51">
-              <div class="fw-bold" style="font-size: 1.1rem">
-                KEYBOARD NAME
+      <h2 class="text-center mb-4">Featured Products</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"> 
+        <?php
+          // ดึงสินค้าแบบสุ่ม 8 ชิ้น (เหมือน store.php)
+          $sql_featured = "SELECT product_id, name, description, price, image_url FROM products ORDER BY RAND() LIMIT 8"; 
+          $result_featured = $conn->query($sql_featured);
+
+          if ($result_featured && $result_featured->num_rows > 0) { 
+            while ($row = $result_featured->fetch_assoc()) {
+              $image_path = 'img/placeholder.png'; 
+              if (!empty($row['image_url']) && file_exists($row['image_url'])) {
+                  $image_path = $row['image_url'];
+              }
+        ?>
+              <div class="col">
+                  <a href="product_detail.php?id=<?php echo $row['product_id']; ?>" class="product-grid-card"> 
+                      <img src="<?php echo htmlspecialchars($image_path); ?>" 
+                           alt="<?php echo htmlspecialchars($row['name']); ?>">
+                      <div class="product-grid-card-body">
+                        <div class="product-grid-card-title"><?php echo htmlspecialchars($row['name']); ?></div>
+                        <div class="product-grid-card-detail"><?php echo htmlspecialchars(substr($row['description'] ?? '', 0, 80)) . '...'; ?></div>
+                        <div class="product-grid-card-price">฿<?php echo number_format($row['price'], 2); ?></div>
+                      </div>
+                  </a>
               </div>
-              <div class="text-muted mb-2">ราคา 0000</div>
-            </div>
-          </div>
-          </div>
-        <button onclick="scrollProduct(-1)" class="btn btn-light position-absolute top-50 start-0 translate-middle-y"
-          style="
-              z-index: 2;
-              border-radius: 50%;
-              box-shadow: 0 2px 8px #0002;
-              width: 48px;
-              height: 48px;
-            ">
-          <span class="d-flex justify-content-center align-items-center w-100 h-100">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
-              class="bi bi-chevron-left" viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-            </svg>
-          </span>
-        </button>
-        <button onclick="scrollProduct(1)" class="btn btn-light position-absolute top-50 end-0 translate-middle-y"
-          style="
-              z-index: 2;
-              border-radius: 50%;
-              box-shadow: 0 2px 8px #0002;
-              width: 48px;
-              height: 48px;
-            ">
-          <span class="d-flex justify-content-center align-items-center w-100 h-100">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
-              class="bi bi-chevron-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-      <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
-      </div>
-      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <li class="ms-3">
-          <a class="text-body-secondary" href="#" aria-label="Instagram">
-            <svg class="bi" width="24" height="24" aria-hidden="true">
-              <use xlink:href="#instagram"></use>
-            </svg>
+        <?php 
+            } // end while
+          } else {
+            echo "<div class='col-12'><p class='no-products'>No featured products found yet.</p></div>"; 
+          } // end if
+          
+          if(isset($conn)) { $conn->close(); } 
+        ?>
+      </div> <div class="text-center mt-5">
+          <a href="store.php" class="btn btn-primary btn-lg" style="background-color: #4d4c51; border-color: #4d4c51;">
+              <i class="fas fa-store me-2"></i> Shop All Products
           </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24">
-              <use xlink:href="#facebook"></use>
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </footer>
-  </div>
+      </div>
+
+    </div> </div> 
+    <div class="container"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Instagram"> <svg class="bi" width="24" height="24" aria-hidden="true"> <use xlink:href="#instagram"></use> </svg> </a> </li> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"> <use xlink:href="#facebook"></use> </svg> </a> </li> </ul> </footer></div>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
   <script>
-    function scrollProduct(dir) {
-      const el = document.getElementById("product-scroll");
-      const cardWidth = el.querySelector(".card").offsetWidth + 16; // card + margin
-      el.scrollBy({ left: dir * cardWidth * 2, behavior: "smooth" });
-    }
-    // Show flash overlay after page load
     window.addEventListener('DOMContentLoaded', function() {
       var overlay = document.getElementById('flash-overlay');
-      overlay.classList.add('active');
-      setTimeout(function() {
-        overlay.classList.remove('active');
-      }, 700); // duration matches animation
+      if (overlay) { 
+        overlay.classList.add('active');
+        setTimeout(function() {
+          overlay.classList.remove('active');
+        }, 700); 
+      }
     });
   </script>
   <div id="flash-overlay"></div>
   
-  </body>
-
+</body>
 </html>

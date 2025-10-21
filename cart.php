@@ -28,7 +28,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     @media (max-width: 991.98px) { .nav-item { padding-left: 8px; padding-right: 8px; font-size: 0.95rem; } }
     .navbar .navbar-brand { font-size: 2rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
     .navbar .nav-link { padding-top: 1rem; padding-bottom: 1rem; }
-    .navbar .nav-link.active, .navbar .nav-link:focus { color: #866953 !important; font-weight: 400; } 
+    .navbar .nav-link.active, .navbar .nav-link:focus { color: #000 !important; font-weight: bold; } 
     .btn-link svg { width: 30px !important; height: 30px !important; }
     body { color: #4d4c51; background-color: #f8f9fa; } 
     .navbar .dropdown-toggle { color: #4d4c51; font-weight: 400; font-size: 1.1rem; }
@@ -94,9 +94,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a>
-          </li>
+          
         </ul>
         <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
           
@@ -125,7 +123,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                   <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
                   <li><hr class="dropdown-divider"></li>
                 <?php endif; ?>
-                <li><a class="dropdown-item" href="profile.php">My Account</a></li>
+               
                 <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>

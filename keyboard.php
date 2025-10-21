@@ -95,8 +95,7 @@ include 'connectdb.php';
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="keycap.php">Keycaps</a> </li>
           <li class="nav-item">
             <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="accessories.php">Accessories</a> </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: #4d4c51; font-weight: 400" href="modding.php">DIY / Modding</a> </li>
+         
         </ul>
         
         <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
@@ -132,7 +131,7 @@ include 'connectdb.php';
                   <li><a class="dropdown-item" href="dashboard.php">Admin Dashboard</a></li>
                   <li><hr class="dropdown-divider"></li>
                 <?php endif; ?>
-                <li><a class="dropdown-item" href="profile.php">My Account</a></li>
+             
                 <li><a class="dropdown-item" href="orders.php">My Orders</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
