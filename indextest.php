@@ -20,7 +20,7 @@ include 'connectdb.php';
     @media (max-width: 991.98px) { .nav-item { padding-left: 8px; padding-right: 8px; font-size: 0.95rem; } }
     .navbar .navbar-brand { font-size: 2rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
     .navbar .nav-link { padding-top: 1rem; padding-bottom: 1rem; }
-    .navbar .nav-link.active, .navbar .nav-link:focus { color: #000 !important; font-weight: bold; } /* Correct Active Color */
+    .navbar .nav-link.active, .navbar .nav-link:focus { color: #866953 !important; font-weight: 400; } /* Correct Active Color */
     .btn-link svg { width: 30px !important; height: 30px !important; }
     body { color: #4d4c51; background-color: #f8f9fa; }
     .navbar .dropdown-toggle { color: #4d4c51; font-weight: 400; font-size: 1.1rem; }
@@ -195,7 +195,7 @@ include 'connectdb.php';
         if(isset($conn)) { $conn->close(); }
       ?>
     </div> <div class="text-center mt-5">
-        <a href="keyboard.php" class="btn btn-outline-secondary btn-lg">View All Products</a>
+        <a href="all_products.php" class="btn btn-outline-secondary btn-lg">View All Products</a>
         </div>
 
   </div> <div class="container"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

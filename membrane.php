@@ -20,7 +20,7 @@ include 'connectdb.php';
     @media (max-width: 991.98px) { .nav-item { padding-left: 8px; padding-right: 8px; font-size: 0.95rem; } }
     .navbar .navbar-brand { font-size: 2rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
     .navbar .nav-link { padding-top: 1rem; padding-bottom: 1rem; }
-    .navbar .nav-link.active, .navbar .nav-link:focus { color: #866953 !important; font-weight: 400; } 
+    .navbar .nav-link.active, .navbar .nav-link:focus { color: #000 !important; font-weight: bold; } 
     .btn-link svg { width: 30px !important; height: 30px !important; }
     body { color: #4d4c51; background-color: #f8f9fa; }
     .navbar .dropdown-toggle { color: #4d4c51; font-weight: 400; font-size: 1.1rem; }
@@ -80,8 +80,7 @@ include 'connectdb.php';
         </ul>
         
         <div class="d-lg-flex col-lg-3 justify-content-lg-end align-items-center">
-          <a href="search.php" class="btn btn-link p-2" style="box-shadow: none" aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" /></svg>
-          </a>
+          
           <?php
           // คำนวณจำนวนสินค้าในตะกร้า (นับรวมทุกชิ้น ไม่ใช่แค่ประเภท)
           $cart_count = 0;
@@ -170,7 +169,19 @@ include 'connectdb.php';
         ?>
     </div>
   </section>
-
+  <script>
+    // (Flash overlay script ... เหมือนเดิม)
+    window.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('flash-overlay');
+      if (overlay) { 
+        overlay.classList.add('active');
+        setTimeout(function() {
+          overlay.classList.remove('active');
+        }, 700); 
+      }
+    });
+  </script>
+  <div id="flash-overlay"></div>
   <div class="container"><footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> <div class="col-md-4 d-flex align-items-center"> <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Instagram"> <svg class="bi" width="24" height="24" aria-hidden="true"> <use xlink:href="#instagram"></use> </svg> </a> </li> <li class="ms-3"> <a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"> <use xlink:href="#facebook"></use> </svg> </a> </li> </ul> </footer></div>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

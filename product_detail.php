@@ -222,13 +222,16 @@ if ($product['category'] === 'Mechanical' && !empty($product['available_switches
 
           <?php if ($product['category'] === 'Mechanical' && !empty($switches)): ?>
             <div class="mb-4">
-              <label for="switchSelect" class="form-label">Select Switch:</label>
-              <select class="form-select" id="switchSelect" name="selected_switch" required>
-                <option value="" selected disabled>-- Please Choose --</option>
-                <?php foreach ($switches as $switch): ?>
-                  <option value="<?php echo htmlspecialchars($switch); ?>"><?php echo htmlspecialchars($switch); ?> Switch</option>
+              <label class="form-label d-block">Select Switch:</label> 
+              <div class="btn-group" role="group" aria-label="Switch selection">
+                <?php foreach ($switches as $index => $switch): 
+                    $switch_id = 'switch_' . htmlspecialchars($switch); // สร้าง ID ที่ไม่ซ้ำกัน
+                ?>
+                  <input type="radio" class="btn-check" name="selected_switch" id="<?php echo $switch_id; ?>" value="<?php echo htmlspecialchars($switch); ?>" autocomplete="off" <?php echo ($index === 0) ? 'required' : ''; // ใส่ required แค่อันแรก ?> >
+                  <label class="btn btn-outline-secondary" for="<?php echo $switch_id; ?>"><?php echo htmlspecialchars($switch); ?> Switch</label>
                 <?php endforeach; ?>
-              </select>
+              </div>
+              <div class="invalid-feedback d-block" id="switchError" style="display: none;">Please select a switch.</div> 
             </div>
           <?php endif; ?>
           <div class="row mb-4 align-items-end">
